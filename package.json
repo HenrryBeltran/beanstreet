@@ -1,0 +1,19 @@
+{
+  "name": "beanstreet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Website of Bean Street Coffee Shop - Fullstack with PosgreSQL, Express.js & Next.js",
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"{api}\" --filter \"{web}\" run dev",
+    "dev:api": "pnpm -F api run dev",
+    "dev:web": "pnpm -F web run dev",
+    "build:api": "pnpm -F api run build",
+    "build:web": "pnpm -F web run build",
+    "start:api": "pnpm -F api run start",
+    "start:web": "pnpm -F web run start"
+  },
+  "keywords": [],
+  "author": "Henrry Beltran",
+  "license": "ISC"
+}
