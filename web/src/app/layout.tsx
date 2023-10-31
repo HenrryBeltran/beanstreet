@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Libre_Bodoni } from "next/font/google";
+import { Libre_Bodoni, Poppins } from "next/font/google";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -14,14 +14,10 @@ export const metadata: Metadata = {
   description: "Project Website of a Coffe Shop called Bean Street",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${poppins.variable} ${bodoni.variable}`}>
-      <body>{children}</body>
+      <body className="bg-stone-50">{children}</body>
     </html>
   );
 }
