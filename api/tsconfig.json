@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "nodenext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
-    "target": "ES2022",
+    "target": "es2022",
     "sourceMap": true,
     "skipLibCheck": true,
     "outDir": "dist",

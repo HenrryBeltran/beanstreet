@@ -1,8 +1,8 @@
 import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 import MenuButton from "./MenuButton";
 import NavLinkMarker from "./client/NavLink";
-import { twMerge } from "tailwind-merge";
 
 type Props = {
   theme?: "crystal-dark" | "dark" | "ligth";
@@ -51,7 +51,7 @@ export default function Navbar({ theme }: Props) {
             Sign Up
           </Link>
           <Link href="/cart" className="relative">
-            <ShoppingBag strokeWidth={1.5} />
+            <ShoppingBag size={24} strokeWidth={1.5} absoluteStrokeWidth={false} />
             <div className="absolute left-2.5 top-2.5 flex h-5 w-5 items-center justify-center rounded-full bg-stone-100">
               <span className="text-sm font-medium leading-none text-stone-800">2</span>
             </div>

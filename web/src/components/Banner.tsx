@@ -7,7 +7,12 @@ export default function Banner() {
       <span>
         10% discount in all drinks. <strong>Shop now</strong>
         <Link href="/shop">
-          <ChevronRight className="inline" width={20} height={20} strokeWidth={2} />
+          <ChevronRight
+            className="inline"
+            size={20}
+            strokeWidth={2}
+            absoluteStrokeWidth={false}
+          />
         </Link>
       </span>
     </div>
