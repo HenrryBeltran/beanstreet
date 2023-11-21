@@ -1,6 +1,6 @@
 import { relations } from "drizzle-orm";
 import { integer, pgTable, text, uuid } from "drizzle-orm/pg-core";
-import { item } from "./items";
+import { drink, pastrie, sandwich } from "./items";
 
 export const offer = pgTable("offer", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
@@ -11,5 +11,7 @@ export const offer = pgTable("offer", {
 });
 
 export const offerRelations = relations(offer, ({ many }) => ({
-  item: many(item),
+  drink: many(drink),
+  sandwich: many(sandwich),
+  pastrie: many(pastrie),
 }));

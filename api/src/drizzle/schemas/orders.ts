@@ -25,7 +25,7 @@ export const orderRelations = relations(order, ({ many }) => ({
 
 export const itemOrder = pgTable("order_item", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
-  price: numeric("total_price", { precision: 2 }).notNull(),
+  totalPrice: numeric("total_price", { precision: 100, scale: 2 }).notNull(),
   name: text("name").notNull(),
   quantity: integer("quantity").notNull(),
   sweetener: boolean("sweetener"),

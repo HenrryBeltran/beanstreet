@@ -35,9 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get("/api", (_req, res) => {
-  return res.json({ message: "Hi from Beanstreet Api!" });
-});
+app.get("/api", (_req, res) => res.json({ message: "Hi from Beanstreet Api!" }));
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/item", itemRouter);
