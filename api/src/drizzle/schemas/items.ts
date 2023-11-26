@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   integer,
@@ -9,7 +10,6 @@ import {
 } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { offer } from "./offer";
-import { relations } from "drizzle-orm";
 
 export const milk = pgTable("milk", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
@@ -43,19 +43,30 @@ export const drink = pgTable("drink", {
   basePrice: numeric("base_price", { precision: 100, scale: 2 }).notNull(),
   sectionName: text("section_name").notNull(),
   sectionSlug: text("section_slug").notNull(),
+  type: text("type").default("drink").notNull(),
+  selected: boolean("selected").default(false).notNull(),
   defaultSweetener: boolean("default_sweetener").default(false).notNull(),
   sweetenerTsp: smallint("sweetener_teaspoon"),
-  defaultMilk: text("default_milk"),
-  defaultSize: text("default_size").notNull(),
+  defaultMilk: uuid("default_milk").references(() => milk.id),
+  defaultSize: uuid("default_size").references(() => size.id),
   offerId: uuid("offer_id").references(() => offer.id),
 });
 
 export const drinkRelations = relations(drink, ({ one, many }) => ({
+  defaultMilk: one(milk, {
+    fields: [drink.defaultMilk],
+    references: [milk.id],
+  }),
+  defaultSize: one(size, {
+    fields: [drink.defaultSize],
+    references: [size.id],
+  }),
   offer: one(offer, {
     fields: [drink.offerId],
     references: [offer.id],
   }),
   milkOption: many(milkOption),
+  sizeOption: many(sizeOption),
 }));
 
 export const milkOption = pgTable("milk_option", {
@@ -107,6 +118,8 @@ export const sandwich = pgTable("sandwich", {
   basePrice: numeric("base_price", { precision: 100, scale: 2 }).notNull(),
   sectionName: text("section_name").notNull(),
   sectionSlug: text("section_slug").notNull(),
+  type: text("type").default("sandwich").notNull(),
+  selected: boolean("selected").default(false).notNull(),
   adjustOrder: text("adjust_order"),
   offerId: uuid("offer_id").references(() => offer.id),
 });
@@ -127,6 +140,8 @@ export const pastrie = pgTable("pastrie", {
   basePrice: numeric("base_price", { precision: 100, scale: 2 }).notNull(),
   sectionName: text("section_name").notNull(),
   sectionSlug: text("section_slug").notNull(),
+  type: text("type").default("pastrie").notNull(),
+  selected: boolean("selected").default(false).notNull(),
   warmed: boolean("warmed"),
   offerId: uuid("offer_id").references(() => offer.id),
 });

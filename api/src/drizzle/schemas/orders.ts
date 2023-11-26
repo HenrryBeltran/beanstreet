@@ -1,5 +1,6 @@
 import { relations } from "drizzle-orm";
 import {
+  bigserial,
   boolean,
   integer,
   numeric,
@@ -13,7 +14,7 @@ import { user } from "./user";
 
 export const order = pgTable("order", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
-  ticket: text("ticket").unique().notNull(),
+  ticket: bigserial("ticket", { mode: "bigint" }),
   state: text("state").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
