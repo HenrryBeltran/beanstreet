@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Facebook, Instagram, TikTok, Twitter, Youtube } from "./SocialIcons";
 
 export default function Footer() {
@@ -52,101 +53,110 @@ export default function Footer() {
               <span className="font-bold text-stone-800">Coffee Shop</span>
             </li>
             <li>
-              <a
+              <Link
                 className="transition-colors hover:text-stone-800"
                 href="/about-us"
                 aria-label="About us link"
               >
                 About us
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="trasnition-colors hover:text-stone-800"
                 href="/locations"
                 aria-label="Locations link"
               >
                 Locations
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="trasnition-colors hover:text-stone-800"
                 href="/faqs"
                 aria-label="FAQs link"
               >
                 FAQs
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="trasnition-colors hover:text-stone-800"
                 href="/sign-up"
                 aria-label="Sign up link"
               >
                 Sign up
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
         <div className="mb-11 space-y-7 xl:m-0 xl:h-fit">
-          <ul className="space-y-2 text-stone-600">
+          <ul className="space-y-3 text-stone-600">
             <li>
               <span className="font-bold text-stone-800">Buy</span>
             </li>
             <li>
-              <a
+              <Link
                 className="transition-colors hover:text-stone-800"
                 href="/shop"
                 aria-label="Shop link"
               >
                 Shop
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="transition-colors hover:text-stone-800"
-                href="/menu"
-                aria-label="Menu link"
+                href="/"
+                aria-label="Shop hot coffees link"
               >
-                Menu
-              </a>
+                Hot Coffees
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="transition-colors hover:text-stone-800"
+                href="/"
+                aria-label="Shop pastries link"
+              >
+                Pastries
+              </Link>
             </li>
           </ul>
-          <ul className="space-y-2 text-stone-600">
+          <ul className="space-y-3 text-stone-600">
             <li>
               <span className="font-bold text-stone-800">Legal</span>
             </li>
             <li>
-              <a
+              <Link
                 className="transition-colors hover:text-stone-800"
                 href="/privacy-policy"
                 aria-label="Shop link"
               >
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="transition-colors hover:text-stone-800"
                 href="/licenses"
                 aria-label="Menu link"
               >
                 Licenses
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
         <div className="mb-16 space-y-7 md:col-span-2 xl:m-0 xl:h-fit">
-          <div className="space-y-2 text-stone-800">
+          <div className="space-y-3 text-stone-800">
             <h4 className="font-bold">Contact Us</h4>
-            <a
+            <Link
               className="block w-fit hover:underline"
               href="mailto:info@beanstreet.com"
               aria-label="Bean Street email"
             >
               info@beanstreet.com
-            </a>
+            </Link>
             <span className="block">+01 555 222 4444</span>
           </div>
           <div>
@@ -182,14 +192,14 @@ export default function Footer() {
           <div>
             <span className="block px-6 text-center text-sm md:p-0 md:text-start">
               &copy;2023 Bean Street, Design and Code{" "}
-              <a
+              <Link
                 className="transition-all hover:font-semibold hover:text-stone-900"
                 href="https://henrrybeltran.vercel.app"
                 target="_blank"
                 aria-label="Developer & Designer - Henrry Beltrán"
               >
                 <span className="whitespace-nowrap">by Henrry Beltran</span>
-              </a>
+              </Link>
             </span>
           </div>
         </div>
@@ -249,11 +259,11 @@ type IconProps = {
 function SocialIcon({ children, href, ariaLabel }: IconProps) {
   return (
     <li className="flex h-7 w-7 items-center justify-center">
-      <a href={href} target="_blank" aria-label={ariaLabel} className="group">
+      <Link href={href} target="_blank" aria-label={ariaLabel} className="group">
         <span className="fill-current transition-colors duration-200 hover:text-stone-700">
           {children}
         </span>
-      </a>
+      </Link>
     </li>
   );
 }
