@@ -3,8 +3,8 @@ import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import { router as authRouter } from "./routes/auth";
+import { router as cartRouter } from "./routes/cart";
 import { router as itemRouter } from "./routes/item";
-import { router as orderRouter } from "./routes/order";
 import { router as userRouter } from "./routes/user";
 
 const port = process.env.PORT ?? 3500;
@@ -40,7 +40,7 @@ app.get("/api", (_req, res) => res.json({ message: "Hi from Beanstreet Api!" }))
 app.use("/api/item", itemRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
-app.use("/api/order", orderRouter);
+app.use("/api/cart", cartRouter);
 
 app.use("*", (_req, res) => {
   res.status(404).json({ message: "Api route not found" });

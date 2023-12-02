@@ -8,4 +8,7 @@
   text-rendering: optimizeLegibility;
 
   font-family: var(--font-poppins);
+
+  --global-viewport: 82.2222vw;
+  --global-viewport-padding: calc(50vw - min(1680px, var(--global-viewport)) / 2);
 }

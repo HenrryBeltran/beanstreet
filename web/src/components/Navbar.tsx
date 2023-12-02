@@ -10,10 +10,10 @@ type Props = {
 
 export default function Navbar({ theme }: Props) {
   return (
-    <nav className="sticky left-0 top-0 h-12 px-6 data-[theme=dark]:bg-stone-950/70 md:h-[60px]">
+    <nav className="h-12 px-6 data-[theme=dark]:bg-stone-950/70 md:h-[60px]">
       <div
         data-theme={theme ?? "dark"}
-        className="relative mx-auto flex h-full max-w-7xl items-center justify-between text-stone-100"
+        className="relative mx-auto flex h-full max-w-screen-xl items-center justify-between text-stone-100"
       >
         <Link
           href="/"
