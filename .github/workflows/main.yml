@@ -29,6 +29,9 @@ jobs:
           pnpm run build
         env:
           CI: true
+
+      - name: List Contents of dist directory
+        run: ls -la
           
       - name: Install zip
         uses: montudor/action-zip@v1
