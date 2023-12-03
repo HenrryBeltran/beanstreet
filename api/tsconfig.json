@@ -14,7 +14,8 @@
   "include": [
     "./src/**/*.ts",
     "./package.json",
-    "drizzle.config.ts"
+    "drizzle.config.ts",
+    "./node_modules"
   ],
   "exclude": [
     "node_modules",

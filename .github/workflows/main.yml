@@ -37,8 +37,8 @@ jobs:
         uses: montudor/action-zip@v1
 
       - name: Zip output
-        run: zip -qq -r dist.zip dist/*
-        working-directory: api
+        run: zip -qq -r dist.zip *
+        working-directory: api/dist
 
       - name: List Contents of api directory
         run: ls -la api
