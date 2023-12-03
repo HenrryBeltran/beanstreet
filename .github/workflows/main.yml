@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      
 jobs:
   deploy:
     name: build and deploy lambda
@@ -12,23 +13,30 @@ jobs:
         node-version: [20.x]
     steps:
       - uses: actions/checkout@v2
+      
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+          
       - uses: pnpm/action-setup@v2
         with:
           version: 8
+          
       - name: npm install and build
         run: |
           cd api && pnpm i
           pnpm run build
         env:
           CI: true
-      - name: zip
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -qq -r dist.zip dist
+          
+      - name: Install zip
+        uses: montudor/action-zip@v1
+
+      - name: Zip output
+        run: zip -qq -r dist.zip dist
+        # working-directory: path/to/work-dir
+        
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
