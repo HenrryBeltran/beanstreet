@@ -7,7 +7,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "dev": "tsx --watch ./src/index.ts",
-    "build": "tsc && cd dist && pnpm i -P",
+    "build": "tsc && cd dist && npm i --omit=dev",
     "start": "node --watch ./dist/index.js"
   },
   "author": "Henrry Beltran",

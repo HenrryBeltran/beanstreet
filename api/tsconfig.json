@@ -13,11 +13,10 @@
   },
   "include": [
     "./src/**/*.ts",
-    "./package.json",
+    "package.json",
     "drizzle.config.ts"
   ],
   "exclude": [
-    "node_modules",
-    "dist"
+    "node_modules"
   ]
 }
