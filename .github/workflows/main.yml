@@ -1,0 +1,35 @@
+name: deploy to lambda
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: build and deploy lambda
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install and build
+        run: pnpm run build:api
+        env:
+          CI: true
+      - name: zip
+        uses: montudor/action-zip@v0.1.0
+        with:
+          entry-point: ./api/dist/
+          args: zip -qq -r ./bundle.zip ./
+      - name: default deploy
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: eu-west-1
+          function_name: beanstreet-func
+          zip_file: bundle.zip
