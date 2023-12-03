@@ -17,7 +17,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install and build
-        run: pnpm run build:api
+        run: |
+          npm i pnpm
+          pnpm run build:api
         env:
           CI: true
       - name: zip
