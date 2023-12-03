@@ -36,8 +36,8 @@ jobs:
 
       - name: Zip dist
         run: |
-          cd api
-          zip -qq -r dist.zip ./dist/*
+          cd api/dist
+          zip -qq -r ../dist.zip .
           
       # - name: Install zip
       #   uses: montudor/action-zip@v1
