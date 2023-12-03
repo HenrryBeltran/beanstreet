@@ -6,8 +6,9 @@ import { router as authRouter } from "./routes/auth";
 import { router as cartRouter } from "./routes/cart";
 import { router as itemRouter } from "./routes/item";
 import { router as userRouter } from "./routes/user";
+import serverless from "serverless-http";
 
-const port = process.env.PORT ?? 3500;
+// const port = process.env.PORT ?? 3500;
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",");
 
 const app = express();
@@ -46,6 +47,8 @@ app.use("*", (_req, res) => {
   res.status(404).json({ message: "Api route not found" });
 });
 
-app.listen(port, () => {
-  console.log(`Listen server on ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Listen server on ${port}`);
+// });
+
+export const handler = serverless(app);
