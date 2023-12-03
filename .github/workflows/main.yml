@@ -1,4 +1,5 @@
 name: deploy to lambda
+
 on:
   push:
     branches:
@@ -37,7 +38,7 @@ jobs:
         uses: montudor/action-zip@v1
 
       - name: Zip output
-        run: zip -qq -r dist.zip ./*
+        run: zip -qq -r dist.zip .
         working-directory: api/dist
 
       - name: List Contents of api directory
