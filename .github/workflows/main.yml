@@ -59,6 +59,7 @@ jobs:
 
       - name: Check the functions
         run: |
+          cd api
           aws lambda update-function-code --function-name beanstreet-func --zip-file "fileb://dist.zip"
         
       # - name: default deploy
