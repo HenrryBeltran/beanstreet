@@ -16,9 +16,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - name: npm install and build
         run: |
-          npm i pnpm
           pnpm run build:api
         env:
           CI: true
