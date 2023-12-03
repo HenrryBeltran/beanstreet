@@ -8,10 +8,12 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "strict": true,
+    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true
   },
   "include": [
     "./src/**/*.ts",
+    "./package.json",
     "drizzle.config.ts"
   ],
   "exclude": [
