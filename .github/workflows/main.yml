@@ -45,7 +45,7 @@ jobs:
 
       - name: Check the functions
         run: |
-          aws lambda update-function-code help
+          aws lambda update-function-code --function-name=beanstreet-func --zip-file=fileb://api/dist.zip
         
       # - name: default deploy
       #   uses: appleboy/lambda-action@v0.1.9
