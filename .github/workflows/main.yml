@@ -43,13 +43,9 @@ jobs:
       - name: List Contents of api directory
         run: ls -la api
 
-      - name: Check the version of aws cli
-        run: |
-          aws --version
-
       - name: Check the functions
         run: |
-          aws lambda help
+          aws lambda update-function-code help
         
       # - name: default deploy
       #   uses: appleboy/lambda-action@v0.1.9
