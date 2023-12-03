@@ -42,18 +42,26 @@ jobs:
 
       - name: List Contents of api directory
         run: ls -la api
+
+      - name: Check the version of aws cli
+        run: |
+          aws --version
+
+      - name: Check the functions
+        run: |
+          aws lambda help
         
-      - name: default deploy
-        uses: appleboy/lambda-action@v0.1.9
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.AWS_REGION }}
-          function_name: beanstreet-func
-          # zip_file: api/dist.zip
-          # memory_size: 128
-          # timeout: 5
-          # handler: handler
-          # role: ${{ secrets.AWS_ROLE }}
-          source: src/main.js
-          # runtime: nodejs20.x
+      # - name: default deploy
+      #   uses: appleboy/lambda-action@v0.1.9
+      #   with:
+      #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws_region: ${{ secrets.AWS_REGION }}
+      #     function_name: beanstreet-func
+      #     # zip_file: api/dist.zip
+      #     # memory_size: 128
+      #     # timeout: 5
+      #     # handler: handler
+      #     # role: ${{ secrets.AWS_ROLE }}
+      #     source: src/main.js
+      #     # runtime: nodejs20.x
