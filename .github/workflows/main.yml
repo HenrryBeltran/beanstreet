@@ -38,8 +38,8 @@ jobs:
         uses: montudor/action-zip@v1
 
       - name: Zip output
-        run: zip -qq -r dist.zip src drizzle.config.js drizzle.config.js.map package.json
-        working-directory: api/dist
+        run: zip -qq -r dist.zip dist/src dist/drizzle.config.js dist/drizzle.config.js.map dist/package.json
+        working-directory: api
 
       - name: List Contents of api directory
         run: ls -la api
