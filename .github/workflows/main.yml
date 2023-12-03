@@ -30,7 +30,7 @@ jobs:
         env:
           CI: true
 
-      - name: List Contents of dist directory
+      - name: List Contents of root directory
         run: ls -la
           
       - name: Install zip
@@ -38,7 +38,10 @@ jobs:
 
       - name: Zip output
         run: zip -qq -r dist.zip dist
-        # working-directory: path/to/work-dir
+        working-directory: api
+
+      - name: List Contents of api directory
+        run: ls -la api
         
       - name: default deploy
         uses: appleboy/lambda-action@master
