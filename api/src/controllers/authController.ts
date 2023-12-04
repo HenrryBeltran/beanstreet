@@ -2,8 +2,8 @@ import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { CookieOptions, RequestHandler } from "express";
 import { v4 as uuid_v4 } from "uuid";
-import { db } from "../drizzle/index";
-import { InsertUserSchema, SelectUser, user } from "../drizzle/schemas/user";
+import { db } from "../drizzle/index.js";
+import { InsertUserSchema, SelectUser, user } from "../drizzle/schemas/user.js";
 
 const SignInCredentialsSchema = InsertUserSchema.partial({ name: true }).pick({
   email: true,

@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { RequestHandler } from "express";
-import { db } from "../drizzle";
-import { InsertUserSchema, SelectUser, user } from "../drizzle/schemas/user";
-import { authentication } from "./authController";
+import { db } from "../drizzle/index.js";
+import { InsertUserSchema, SelectUser, user } from "../drizzle/schemas/user.js";
+import { authentication } from "./authController.js";
 
 export const updateUser: RequestHandler = async (req, res) => {
   let foundUserSession: SelectUser | undefined;

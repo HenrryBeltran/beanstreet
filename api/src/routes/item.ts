@@ -7,7 +7,7 @@ import {
   getSandwichBySlug,
   getSelectedDrinks,
   getSelectedFood,
-} from "../controllers/itemController";
+} from "../controllers/itemController.js";
 
 export const router = Router();
 

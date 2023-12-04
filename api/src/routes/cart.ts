@@ -5,7 +5,7 @@ import {
   getAllItemsFromCart,
   getItemsCountFromCart,
   updateItemFromCart,
-} from "../controllers/cartController";
+} from "../controllers/cartController.js";
 
 export const router = Router();
 

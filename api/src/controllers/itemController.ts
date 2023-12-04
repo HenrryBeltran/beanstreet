@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { RequestHandler } from "express";
-import { db } from "../drizzle/index";
+import { db } from "../drizzle/index.js";
 
 export const getAllItems: RequestHandler = async (req, res) => {
   const sort = req.query.sort as "name" | "price" | undefined;

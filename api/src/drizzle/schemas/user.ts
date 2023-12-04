@@ -2,7 +2,7 @@ import { relations } from "drizzle-orm";
 import { pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { itemOrder } from "./orders";
+import { itemOrder } from "./orders.js";
 
 export const rolesEnum = pgEnum("role", ["viewer", "customer", "manager"]);
 

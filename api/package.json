@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "./src/main.ts",
   "scripts": {
-    "dev": "tsx --watch ./src/index.ts",
-    "build": "tsc",
-    "start": "node --watch ./dist/index.js"
+    "dev": "tsx --watch ./src/main.local.ts",
+    "build": "tsc && cd dist && npm i --omit=dev",
+    "start": "node --watch ./dist/main.local.js"
   },
   "author": "Henrry Beltran",
   "license": "MIT",
