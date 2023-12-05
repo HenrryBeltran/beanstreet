@@ -35,7 +35,7 @@ function CarouselCard({ item }: { item: Item }) {
   return (
     <li className="relative w-fit snap-start space-y-3 pb-3">
       <Image
-        src={`http://localhost:3000/items/${item.slug}.jpg`}
+        src={`${process.env.SITE_URL}/items/${item.slug}.jpg`}
         width={320}
         height={320}
         className="aspect-square bg-stone-300 object-cover object-center"

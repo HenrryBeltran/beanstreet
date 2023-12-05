@@ -10,7 +10,9 @@ export default function AboutUsOverview() {
           <Image
             src={AboutUsImage}
             alt="About Us Overview Photo"
-            sizes="(min-width: 1280px) var(50vw - var(--global-viewport-padding)), 100vw"
+            height={446}
+            width={592}
+            quality={80}
             className="z-10 h-[27.875rem] w-full object-cover px-6 py-12 xl:w-[calc(50vw-var(--global-viewport-padding))] xl:translate-y-16 xl:p-0"
             placeholder="blur"
             loading="lazy"

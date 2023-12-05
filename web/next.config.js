@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "beanstreet.vercel.app",
+        hostname: "beanstreet.pages.dev",
         port: "",
         pathname: "/**",
       },

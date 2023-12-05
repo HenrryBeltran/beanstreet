@@ -16,7 +16,7 @@ export default function Hero() {
         src={beanStreetHero}
         alt="Hero Bean Street Cover"
         placeholder="blur"
-        quality={100}
+        quality={80}
         fill
         sizes="100dvh"
       />
