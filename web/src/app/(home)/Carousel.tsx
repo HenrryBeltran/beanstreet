@@ -18,7 +18,7 @@ type Item = {
 
 export default async function Carousel({ type }: { type: "drinks" | "food" }) {
   const response = await axios.get<SeletedCoffees>(
-    `http://localhost:3500/api/item/selected/${type}`,
+    `${process.env.API_URL}/item/selected/${type}`,
   );
   const data = response.data;
 
