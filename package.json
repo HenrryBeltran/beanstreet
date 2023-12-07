@@ -11,9 +11,9 @@
     "build:api": "pnpm -F api run build",
     "build:web": "pnpm -F web run build",
     "start:api": "pnpm -F api run start",
-    "start:web": "pnpm -F web run start"
+    "start:web": "pnpm -F web run start",
+    "lint:web": "pnpm -F web run lint"
   },
-  "keywords": [],
   "author": "Henrry Beltran",
   "license": "ISC"
 }

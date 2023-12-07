@@ -1,4 +1,5 @@
-import Carousel from "./Carousel";
+import { Suspense } from "react";
+import CarouselContainer, { CarouselSkeleton } from "./CarouselContainer";
 
 export default function SelectedCoffees() {
   return (
@@ -38,7 +39,9 @@ export default function SelectedCoffees() {
             coffees and drinks.
           </h2>
         </div>
-        <Carousel type="drinks" />
+        <Suspense fallback={<CarouselSkeleton />}>
+          <CarouselContainer type="drinks" />
+        </Suspense>
       </div>
       <div className="space-y-8">
         <div className="me-auto ms-auto max-w-screen-3xl px-6 lg:w-[var(--global-viewport)] lg:px-0">
@@ -47,7 +50,9 @@ export default function SelectedCoffees() {
             everyone’s favorites.
           </h2>
         </div>
-        <Carousel type="food" />
+        <Suspense fallback={<CarouselSkeleton />}>
+          <CarouselContainer type="food" />
+        </Suspense>
       </div>
     </section>
   );

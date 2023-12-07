@@ -1,6 +1,6 @@
 import { relations } from "drizzle-orm";
 import { integer, pgTable, text, uuid } from "drizzle-orm/pg-core";
-import { drink, pastrie, sandwich } from "./items.js";
+import { drink, pastrie, sandwich } from "./items.ts";
 
 export const offer = pgTable("offer", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),

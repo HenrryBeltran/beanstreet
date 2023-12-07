@@ -10,7 +10,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
-import { user } from "./user.js";
+import { user } from "./user.ts";
 
 export const order = pgTable("order", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),

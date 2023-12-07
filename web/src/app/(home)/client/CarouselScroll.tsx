@@ -1,9 +1,9 @@
 "use client";
 
 import useWindowSize from "@/hooks/useWindowSize";
-import { lerp } from "@/utils";
+import { lerp } from "@/utils/functions";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { animate, AnimationControls } from "motion";
+import { AnimationControls, animate } from "motion";
 import { ReactNode, UIEvent, useEffect, useRef, useState } from "react";
 
 type Props = {

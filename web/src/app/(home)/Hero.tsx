@@ -80,7 +80,7 @@ export default function Hero() {
             Our cozy and modern coffee shop is the perfect place to relax and enjoy a cup
             of coffee with friends or alone.
           </p>
-          <LinkButton href="/shop" placeholder="Shop Now" />
+          <LinkButton href="/shop" placeholder="Shop Now" size="lg" />
         </div>
       </div>
       <ChevronsDown
