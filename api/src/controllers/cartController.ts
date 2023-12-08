@@ -2,8 +2,7 @@ import { and, eq, sql } from "drizzle-orm";
 import type { CookieOptions, RequestHandler } from "express";
 import { v4 as uuid_v4 } from "uuid";
 import { db } from "../drizzle/index.js";
-import { InsertItemOrderSchema, itemOrder } from "../drizzle/schemas/orders.js";
-import { user } from "../drizzle/schemas/user.js";
+import { InsertItemOrderSchema, itemOrder, user } from "../drizzle/schemas.js";
 
 const cookieOptions: CookieOptions = {
   path: "/",

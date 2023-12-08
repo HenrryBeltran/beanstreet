@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "tsx --watch ./src/main.local.ts",
     "build": "tsc && cd dist && npm i --omit=dev",
-    "start": "node --watch ./dist/main.local.js"
+    "start": "node --watch ./dist/src/main.local.js"
   },
   "author": "Henrry Beltran",
   "license": "MIT",
@@ -23,6 +23,7 @@
     "pg": "^8.11.3",
     "postgres": "^3.4.3",
     "serverless-http": "^3.2.0",
+    "tsc-esm-fix": "^2.20.18",
     "uuid": "^9.0.1",
     "zod": "^3.22.4"
   },

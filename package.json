@@ -15,5 +15,8 @@
     "lint:web": "pnpm -F web run lint"
   },
   "author": "Henrry Beltran",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "20.10.0"
+  }
 }

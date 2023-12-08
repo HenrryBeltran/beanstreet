@@ -1,15 +1,55 @@
 import { relations } from "drizzle-orm";
 import {
+  bigserial,
   boolean,
   integer,
   numeric,
+  pgEnum,
   pgTable,
   smallint,
   text,
+  timestamp,
   uuid,
+  varchar,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
-import { offer } from "./offer";
+import { z } from "zod";
+
+export const rolesEnum = pgEnum("role", ["viewer", "customer", "manager"]);
+
+export const user = pgTable("user", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: varchar("name", { length: 64 }).notNull(),
+  email: varchar("email", { length: 320 }).unique().notNull(),
+  password: text("password").notNull(),
+  role: rolesEnum("role").default("customer").notNull(),
+  address: text("address"),
+  phoneNumber: text("phone_number"),
+  session: uuid("session").unique(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const userRelations = relations(user, ({ many }) => ({
+  itemOrder: many(itemOrder),
+}));
+
+export const SelectUserSchema = createSelectSchema(user);
+export const InsertUserSchema = createInsertSchema(user, {
+  name: z
+    .string({ required_error: "Name is required." })
+    .max(64, { message: "Your name must be less than 64 characters." }),
+  email: z
+    .string({ required_error: "Email is required." })
+    .max(320, { message: "Your email must be less than 320 characters." }),
+  password: z
+    .string({ required_error: "Password is required." })
+    .min(8, { message: "Your password must be at least 8 characters." })
+    .max(32, { message: "Your password must be less than 32 characters." }),
+});
+
+export type SelectUser = typeof user.$inferSelect;
+export type InsertUser = typeof user.$inferInsert;
 
 export const milk = pgTable("milk", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
@@ -182,3 +222,72 @@ export type InsertSandwich = typeof sandwich.$inferInsert;
 
 export type SelectPastrie = typeof pastrie.$inferSelect;
 export type InsertPastrie = typeof pastrie.$inferInsert;
+
+export const order = pgTable("order", {
+  id: uuid("id").primaryKey().defaultRandom().notNull(),
+  ticket: bigserial("ticket", { mode: "bigint" }),
+  state: text("state").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const orderRelations = relations(order, ({ many }) => ({
+  itemOrder: many(itemOrder),
+}));
+
+export const itemOrder = pgTable("order_item", {
+  id: uuid("id").primaryKey().defaultRandom().notNull(),
+  totalPrice: numeric("total_price", { precision: 100, scale: 2 }).notNull(),
+  name: text("name").notNull(),
+  quantity: integer("quantity").notNull(),
+  sweetener: boolean("sweetener"),
+  sweetenerTsp: integer("sweetener_teaspoon"),
+  milk: text("milk"),
+  size: text("size"),
+  sizeUnit: text("size_unit"),
+  adjustOrder: text("adjust_order"),
+  warmed: boolean("warmed"),
+  urlSearchParams: text("url_search_params"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  orderId: uuid("order_id").references(() => order.id),
+  guestId: uuid("guest_id"),
+  userId: uuid("user_id").references(() => user.id),
+});
+
+export const itemOrderRelations = relations(itemOrder, ({ one }) => ({
+  order: one(order, {
+    fields: [itemOrder.orderId],
+    references: [order.id],
+  }),
+  user: one(user, {
+    fields: [itemOrder.userId],
+    references: [user.id],
+  }),
+}));
+
+export const SelectOrderSchema = createSelectSchema(order);
+export const InsertOrderSchema = createInsertSchema(order);
+
+export const SelectItemOrderSchema = createSelectSchema(itemOrder);
+export const InsertItemOrderSchema = createInsertSchema(itemOrder);
+
+export type SelectOrder = typeof order.$inferSelect;
+export type InsertOrder = typeof order.$inferInsert;
+
+export type SelectItemOrder = typeof itemOrder.$inferSelect;
+export type InsertItemOrder = typeof itemOrder.$inferInsert;
+
+export const offer = pgTable("offer", {
+  id: uuid("id").primaryKey().defaultRandom().notNull(),
+  name: text("name").unique().notNull(),
+  slug: text("slug").unique().notNull(),
+  description: text("description").notNull(),
+  discount: integer("discount").notNull(),
+});
+
+export const offerRelations = relations(offer, ({ many }) => ({
+  drink: many(drink),
+  sandwich: many(sandwich),
+  pastrie: many(pastrie),
+}));
