@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { RequestHandler } from "express";
+import type { RequestHandler } from "express";
 import { db } from "../drizzle/index.js";
 
 export const getAllItems: RequestHandler = async (req, res) => {
@@ -229,7 +229,7 @@ export const getSelectedDrinks: RequestHandler = async (_req, res) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Databese Error: Failed to get drinks", error });
+      .json({ message: "Database Error: Failed to get drinks", error });
   }
 };
 
@@ -314,6 +314,10 @@ export const getDrinkBySlug: RequestHandler = async (req, res) => {
         ON milk.id = drink.default_milk
       WHERE drink.slug = ${slug};
     `);
+
+    if (drink[0] === undefined) {
+      return res.status(500).json({ message: "Database Error: Failed to get drink" });
+    }
 
     const milkOptions = await db.execute(sql`
       SELECT

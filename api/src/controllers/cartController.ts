@@ -1,5 +1,5 @@
 import { and, eq, sql } from "drizzle-orm";
-import { CookieOptions, RequestHandler } from "express";
+import type { CookieOptions, RequestHandler } from "express";
 import { v4 as uuid_v4 } from "uuid";
 import { db } from "../drizzle/index.js";
 import { InsertItemOrderSchema, itemOrder } from "../drizzle/schemas/orders.js";
@@ -210,7 +210,7 @@ export const deleteFromTheCart: RequestHandler = async (req, res) => {
 
   if (foundUser) {
     try {
-      const [{ itemOrderId }] = await db
+      const [result] = await db
         .delete(itemOrder)
         .where(
           and(
@@ -220,7 +220,7 @@ export const deleteFromTheCart: RequestHandler = async (req, res) => {
         )
         .returning({ itemOrderId: itemOrder.id });
 
-      if (!itemOrderId) {
+      if (!result?.itemOrderId) {
         return res.status(403).json({ message: "Invalid credentials" });
       }
 
@@ -233,7 +233,7 @@ export const deleteFromTheCart: RequestHandler = async (req, res) => {
   }
 
   try {
-    const [{ itemOrderId }] = await db
+    const [result] = await db
       .delete(itemOrder)
       .where(
         and(
@@ -243,7 +243,7 @@ export const deleteFromTheCart: RequestHandler = async (req, res) => {
       )
       .returning({ itemOrderId: itemOrder.id });
 
-    if (!itemOrderId) {
+    if (!result?.itemOrderId) {
       return res.status(403).json({ message: "Invalid credentials" });
     }
 
