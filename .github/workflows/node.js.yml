@@ -1,0 +1,55 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches: ["main"]
+      
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [20.10.0]
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          
+      - name: pnpm install and build
+        run: |
+          cd api && pnpm i
+          pnpm run build
+        env:
+          CI: true
+
+      - name: Setup .env file
+        run: |
+          touch .env
+          echo "${{ secrets.PRODUCTION_ENV }}"
+
+      # - name: Zip dist
+      #   run: |
+      #     cd api/dist
+      #     zip -qq -r ../dist.zip .
+      #
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: us-east-2
+      #
+      # - name: Check the functions
+      #   run: |
+      #     cd api
+      #     aws lambda update-function-code --function-name beanstreet-func --zip-file "fileb://dist.zip"
