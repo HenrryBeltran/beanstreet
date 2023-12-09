@@ -33,6 +33,7 @@ jobs:
 
       - name: Setup .env file
         run: |
+          cd api/dist
           touch .env
           echo "${{ secrets.PRODUCTION_ENV }}"
 
