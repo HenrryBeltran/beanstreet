@@ -37,7 +37,9 @@ jobs:
           touch .env
           echo "${{ secrets.PRODUCTION_ENV }}" > .env
 
-      - run: pm2 restart BackendAPI
+      - run: |
+          cd
+          pm2 restart BackendAPI
 
       # - name: Zip dist
       #   run: |
