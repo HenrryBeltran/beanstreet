@@ -5,7 +5,7 @@ on:
     branches: ["main"]
       
 jobs:
-  deploy:
+  build:
     runs-on: self-hosted
 
     strategy:
@@ -35,7 +35,7 @@ jobs:
         run: |
           cd api/dist
           touch .env
-          echo "${{ secrets.PRODUCTION_ENV }}"
+          echo "${{ secrets.PRODUCTION_ENV }}" > .env
 
       - name: Restart Server API
         run: pm2 restart BackendAPI
