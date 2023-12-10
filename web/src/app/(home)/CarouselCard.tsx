@@ -8,6 +8,7 @@ export default function CarouselCard({ item }: { item: Item }) {
         src={`${process.env.SITE_URL}/items/${item.slug}.jpg`}
         width={320}
         height={320}
+        loading="eager"
         className="aspect-square bg-stone-300 object-cover object-center"
         alt={item.name}
       />
