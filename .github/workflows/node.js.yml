@@ -34,6 +34,7 @@ jobs:
           echo "${{ secrets.PRODUCTION_ENV }}" > .env
 
       - run: |
-          cd
+          npm i -g pm2 
+          pm2 ls
           pm2 bash ./pm2_restarter.sh
 
