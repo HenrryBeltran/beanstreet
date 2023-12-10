@@ -24,7 +24,7 @@ jobs:
       #   with:
       #     version: 8
           
-      - name: pnpm install and build
+      - name: npm install and build
         run: |
           cd api && npm i
           npm run build
@@ -36,6 +36,9 @@ jobs:
           cd api/dist
           touch .env
           echo "${{ secrets.PRODUCTION_ENV }}"
+
+      - name: Restart Server API
+        run: pm2 restart BackendAPI
 
       # - name: Zip dist
       #   run: |
