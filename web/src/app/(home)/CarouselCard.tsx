@@ -9,7 +9,6 @@ export default function CarouselCard({ item }: { item: Item }) {
         width={320}
         height={320}
         className="aspect-square bg-stone-300 object-cover object-center"
-        loading="lazy"
         alt={item.name}
       />
       <h3 className="font-serif text-xl font-bold leading-none text-stone-800">

@@ -36,6 +36,4 @@ jobs:
       - name: Restart pm2 Backend API
         run: |
           npm i -g pm2 
-          pm2 ls
           pm2 restart BackendAPI
-
