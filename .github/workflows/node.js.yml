@@ -20,10 +20,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           
-      # - uses: pnpm/action-setup@v2
-      #   with:
-      #     version: 8
-          
       - name: npm install and build
         run: |
           cd api && npm i
@@ -39,21 +35,5 @@ jobs:
 
       - run: |
           cd
-          pm2 restart BackendAPI
+          pm2 bash ./pm2_restarter.sh
 
-      # - name: Zip dist
-      #   run: |
-      #     cd api/dist
-      #     zip -qq -r ../dist.zip .
-      #
-      # - name: Configure AWS Credentials
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: us-east-2
-      #
-      # - name: Check the functions
-      #   run: |
-      #     cd api
-      #     aws lambda update-function-code --function-name beanstreet-func --zip-file "fileb://dist.zip"
