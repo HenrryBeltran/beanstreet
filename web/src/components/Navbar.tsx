@@ -5,7 +5,7 @@ import MenuButton from "./MenuButton";
 import NavLinkMarker from "./client/NavLink";
 
 type Props = {
-  theme?: "crystal-dark" | "dark" | "ligth";
+  theme?: "crystal-dark" | "dark" | "light";
 };
 
 export default function Navbar({ theme }: Props) {

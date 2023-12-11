@@ -7,15 +7,17 @@ import Image from "next/image";
 import beanStreetHero from "../../../public/bean-street-hero.jpg";
 import { Facebook, Instagram, TikTok, Twitter, Youtube } from "@/components/SocialIcons";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Hero() {
   return (
     <section className="relative flex min-h-[100svh] flex-col bg-stone-950/60">
       <Image
-        className="absolute top-0 -z-50 h-[100dvh] object-cover object-center"
+        className="absolute top-0 -z-50 h-[100svh] object-cover object-center"
         src={beanStreetHero}
         alt="Hero Bean Street Cover"
         placeholder="blur"
+        priority={true}
         quality={80}
         fill
         sizes="100dvh"
@@ -36,6 +38,7 @@ export default function Hero() {
             className="transition-colors hover:text-stone-50"
             href="https://instagram.com"
             target="_blank"
+            aria-label="Instagram link"
           >
             <Instagram />
           </Link>
@@ -43,6 +46,7 @@ export default function Hero() {
             className="transition-colors hover:text-stone-50"
             href="https://facebook.com"
             target="_blank"
+            aria-label="Facebook link"
           >
             <Facebook />
           </Link>
@@ -50,6 +54,7 @@ export default function Hero() {
             className="transition-colors hover:text-stone-50"
             href="https://twitter.com"
             target="_blank"
+            aria-label="Twitter link"
           >
             <Twitter />
           </Link>
@@ -57,6 +62,7 @@ export default function Hero() {
             className="transition-colors hover:text-stone-50"
             href="https://tiktok.com"
             target="_blank"
+            aria-label="Tiktok link"
           >
             <TikTok />
           </Link>
@@ -64,13 +70,16 @@ export default function Hero() {
             className="transition-colors hover:text-stone-50"
             href="https://youtube.com"
             target="_blank"
+            aria-label="Youtube link"
           >
             <Youtube />
           </Link>
         </div>
       </div>
       <Navbar theme="crystal-dark" />
-      <FloatBanner />
+      <Suspense>
+        <FloatBanner />
+      </Suspense>
       <div className="flex h-full grow items-center justify-center">
         <div className="mx-auto mt-12 flex max-w-3xl flex-col items-center text-center">
           <h1 className="max-w-[80vw] font-serif text-[min(15vw,128px)] leading-[0.9] tracking-tighter text-white">

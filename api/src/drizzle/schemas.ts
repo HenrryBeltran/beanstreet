@@ -278,12 +278,20 @@ export type InsertOrder = typeof order.$inferInsert;
 export type SelectItemOrder = typeof itemOrder.$inferSelect;
 export type InsertItemOrder = typeof itemOrder.$inferInsert;
 
+export const offerTypeEnum = pgEnum("offer_type", [
+  "main",
+  "drinks",
+  "food",
+  "one-section",
+]);
+
 export const offer = pgTable("offer", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
   name: text("name").unique().notNull(),
   slug: text("slug").unique().notNull(),
   description: text("description").notNull(),
   discount: integer("discount").notNull(),
+  offerType: offerTypeEnum("offer_type").array(),
 });
 
 export const offerRelations = relations(offer, ({ many }) => ({

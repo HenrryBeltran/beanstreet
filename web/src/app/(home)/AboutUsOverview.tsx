@@ -7,32 +7,37 @@ export default function AboutUsOverview() {
     <section className="relative bg-stone-50">
       <div className="mx-auto max-w-screen-3xl xl:w-[var(--global-viewport)] xl:pb-48 xl:pt-32">
         <div className="flex flex-col items-center xl:flex-row xl:justify-between">
-          <Image
-            src={AboutUsImage}
-            alt="About Us Overview Photo"
-            // height={446}
-            // width={592}
-            sizes="(min-width: 1280px) calc(50vw - (50vw - min(1680px, 82.2222vw) / 2)), calc(100vw - 48px)"
-            quality={80}
-            className="z-10 h-[27.875rem] w-full object-cover px-6 py-12 xl:w-[calc(50vw-var(--global-viewport-padding))] xl:translate-y-16 xl:p-0"
-            placeholder="blur"
-            loading="lazy"
-          />
+          <figure className="z-10 px-6 py-12 xl:p-0">
+            <Image
+              src={AboutUsImage}
+              alt="About Us Overview Photo"
+              sizes="(min-width: 1280px) calc(50vw - (50vw - min(1680px, 82.2222vw) / 2)), calc(100vw - 48px)"
+              quality={80}
+              className="h-[27.875rem] w-full object-cover xl:w-[calc(50vw-var(--global-viewport-padding))] xl:translate-y-16"
+              placeholder="blur"
+              loading="lazy"
+            />
+          </figure>
           <div className="w-full bg-orange-100 py-12 lg:py-16 xl:absolute xl:right-0 xl:top-32 xl:w-[calc(50%+128px)]">
             <div className="flex justify-center px-6 xl:justify-start xl:px-0 xl:pl-[calc(128px+64px)] xl:pr-32">
               <div className="md:max-w-[528px]">
-                <h3 className="mb-6 text-2xl uppercase leading-none text-orange-600">
+                <h2 className="mb-6 text-2xl uppercase leading-none text-orange-600">
                   Overview
-                </h3>
-                <h2 className="mb-3 w-full font-serif text-4xl font-medium capitalize tracking-tight text-stone-800">
-                  We&apos;re committed to make the best coffee for you
                 </h2>
+                <h3 className="mb-3 w-full font-serif text-4xl font-medium capitalize tracking-tight text-stone-800">
+                  We&apos;re committed to make the best coffee for you
+                </h3>
                 <p className="mb-11 w-full font-light leading-relaxed text-stone-700">
                   We believe that coffee is not just a drink, but an experience.
                   That&apos;s why we use only the best coffee beans and ingredients to
                   create our unique coffee.
                 </p>
-                <LinkButton href="/about-us" placeholder="About Us" dark={true} />
+                <LinkButton
+                  href="/about-us"
+                  placeholder="About Us"
+                  dark={true}
+                  ariaLabel="About us link"
+                />
               </div>
             </div>
           </div>

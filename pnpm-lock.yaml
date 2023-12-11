@@ -116,12 +116,18 @@ importers:
       react-dom:
         specifier: ^18
         version: 18.2.0(react@18.2.0)
+      react-hook-form:
+        specifier: ^7.49.0
+        version: 7.49.0(react@18.2.0)
       sharp:
         specifier: ^0.33.0
         version: 0.33.0
       tailwind-merge:
         specifier: ^2.1.0
         version: 2.1.0
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
     devDependencies:
       '@tanstack/eslint-plugin-query':
         specifier: ^5.12.1
@@ -4645,6 +4651,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form@7.49.0(react@18.2.0):
+    resolution: {integrity: sha512-gf4qyY4WiqK2hP/E45UUT6wt3Khl49pleEVcIzxhLBrD6m+GMWtLRk0vMrRv45D1ZH8PnpXFwRPv0Pewske2jw==}
+    engines: {node: '>=18', pnpm: '8'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is@16.13.1:

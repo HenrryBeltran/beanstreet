@@ -17,8 +17,10 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.49.0",
     "sharp": "^0.33.0",
-    "tailwind-merge": "^2.1.0"
+    "tailwind-merge": "^2.1.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.12.1",

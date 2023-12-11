@@ -14,11 +14,26 @@ export type Item = {
   section_slug: string;
 };
 
-export default async function getSelectedItems(type: string): Promise<SelectedCoffees> {
-  const response = await fetch(`${process.env.API_URL}/item/selected/${type}`, {
-    next: { revalidate: 10 },
-  });
-  const data: SelectedCoffees = await response.json();
+export default async function getSelectedItems(
+  type: string,
+): Promise<SelectedCoffees | null> {
+  let response: Response;
+
+  try {
+    response = await fetch(`${process.env.API_URL}/item/selected/${type}`, {
+      next: { revalidate: 60 },
+    });
+  } catch (error) {
+    console.log("~ Fetch Error: Failed to get selected coffees", error);
+    return null;
+  }
+
+  const data: SelectedCoffees | undefined = await response.json();
+
+  if (!data) {
+    console.error("~ Server Error: Failed to parse selected coffees data");
+    return null;
+  }
 
   return data;
 }
