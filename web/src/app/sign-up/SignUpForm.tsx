@@ -44,7 +44,7 @@ export default function SignUpForm() {
     const { name, email, password } = data;
 
     const { error, result: response } = await Try(
-      fetch("http://localhost:3500/api/auth/sign-up", {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/sign-up`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
