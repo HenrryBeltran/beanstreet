@@ -13,11 +13,19 @@ const SignInCredentialsSchema = InsertUserSchema.partial({ name: true }).pick({
 const cookieOptions: CookieOptions = {
   path: "/",
   httpOnly: true,
-  secure: process.env.NODE_DEVELOPMENT === "production",
-  domain: process.env.DOMAIN,
-  sameSite: "none",
-  expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 92),
+  domain: ".localhost",
+  secure: false,
+  // sameSite: "strict",
+  // sameSite: "none",
+  maxAge: 1000 * 60 * 60 * 24 * 92,
 };
+
+// path: "/",
+// httpOnly: true, // Accessible only by web server
+// domain:
+//   process.env.NODE_ENVIRONMENT === "development" ? ".localhost" : ".henrryb.site",
+// secure: process.env.NODE_ENVIRONMENT === "development" ? false : true,
+// maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expiry: set to match refresh token
 
 export const signIn: RequestHandler = async (req, res) => {
   const validatedCredentials = SignInCredentialsSchema.safeParse(req.body);
@@ -80,7 +88,9 @@ export const signIn: RequestHandler = async (req, res) => {
 };
 
 export const signUp: RequestHandler = async (req, res) => {
-  const validatedCredentials = InsertUserSchema.safeParse(req.body);
+  const validatedCredentials = InsertUserSchema.partial({ role: true }).safeParse(
+    req.body,
+  );
 
   if (!validatedCredentials.success) {
     return res.status(403).json({
@@ -128,6 +138,7 @@ export const signUp: RequestHandler = async (req, res) => {
         email,
         password: hashedPassword,
         session: sessionId,
+        role: ["customer"],
       })
       .returning({ userId: user.id });
   } catch (error) {

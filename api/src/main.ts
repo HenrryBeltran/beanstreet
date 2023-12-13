@@ -8,33 +8,31 @@ import { router as itemRouter } from "./routes/item.js";
 import { router as offerRouter } from "./routes/offer.js";
 import { router as userRouter } from "./routes/user.js";
 
-// const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",");
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",");
 const port = process.env.PORT ?? 3500;
 
 export const app = express();
 
-// app.use(
-//   cors({
-//     origin(requestOrigin, callback) {
-//       function checkOrgin() {
-//         if (process.env.NODE_ENVIRONMENT === "development") {
-//           return !requestOrigin;
-//         }
-//         return false;
-//       }
-//
-//       if (checkOrgin() || allowedOrigins?.includes(requestOrigin!)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     credentials: true,
-//     optionsSuccessStatus: 200,
-//   }),
-// );
+app.use(
+  cors({
+    origin(requestOrigin, callback) {
+      function checkOrgin() {
+        if (process.env.NODE_ENVIRONMENT === "development") {
+          return !requestOrigin;
+        }
+        return false;
+      }
 
-app.use(cors({ origin: "*" }));
+      if (checkOrgin() || allowedOrigins?.includes(requestOrigin!)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    optionsSuccessStatus: 200,
+  }),
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

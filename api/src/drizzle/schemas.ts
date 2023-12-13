@@ -22,7 +22,7 @@ export const user = pgTable("user", {
   name: varchar("name", { length: 64 }).notNull(),
   email: varchar("email", { length: 320 }).unique().notNull(),
   password: text("password").notNull(),
-  role: rolesEnum("role").default("customer").notNull(),
+  role: rolesEnum("role").array().notNull(),
   address: text("address"),
   phoneNumber: text("phone_number"),
   session: uuid("session").unique(),

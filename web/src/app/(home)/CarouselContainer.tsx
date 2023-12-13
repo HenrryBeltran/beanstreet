@@ -1,4 +1,4 @@
-import getSelectedItems from "@/lib/getSelectedItems";
+import { getSelectedItems } from "@/lib/getSelectedItems";
 import CarouselCard from "./CarouselCard";
 import CarouselScroll from "./CarouselScroll";
 

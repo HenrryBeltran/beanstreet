@@ -10,21 +10,30 @@ type Props = {
 
 export default function Navbar({ theme }: Props) {
   return (
-    <nav className="h-12 px-6 data-[theme=dark]:bg-stone-950/70 md:h-[60px]">
+    <nav
+      data-theme={theme ?? "dark"}
+      className="h-12 px-6 data-[theme=crystal-dark]:bg-transparent data-[theme=dark]:bg-stone-950/70 data-[theme=light]:bg-stone-50 md:h-[60px]"
+    >
       <div
         data-theme={theme ?? "dark"}
-        className="relative mx-auto flex h-full max-w-screen-xl items-center justify-between text-stone-100"
+        className="relative mx-auto flex h-full max-w-screen-xl items-center justify-between data-[theme=crystal-dark]:text-stone-100 data-[theme=dark]:text-stone-100 data-[theme=light]:text-stone-800"
       >
         <Link
           href="/"
           className="flex h-min w-min flex-col items-center whitespace-nowrap"
         >
-          <h1 className="font-serif text-[14.5px] font-bold leading-none tracking-tight text-stone-50 md:text-lg md:leading-none">
+          <span
+            data-theme={theme ?? "dark"}
+            className="font-serif text-[14.5px] font-bold leading-none tracking-tight data-[theme=crystal-dark]:text-stone-50 data-[theme=dark]:text-stone-50 data-[theme=light]:text-stone-800 md:text-lg md:leading-none"
+          >
             Bean Street
-          </h1>
-          <h2 className="text-[9.5px] font-medium leading-none tracking-widest text-stone-300 md:scale-100 md:text-xs md:leading-none">
+          </span>
+          <span
+            data-theme={theme ?? "dark"}
+            className="text-[9.5px] font-medium leading-none tracking-widest data-[theme=crystal-dark]:text-stone-300 data-[theme=dark]:text-stone-300 data-[theme=light]:text-stone-600 md:scale-100 md:text-xs md:leading-none"
+          >
             Coffee Shop
-          </h2>
+          </span>
         </Link>
         <ul className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:flex md:gap-8">
           <NavLink className="hidden lg:inline" name="Home" slug="" />
@@ -35,14 +44,16 @@ export default function Navbar({ theme }: Props) {
         <div className="flex items-center gap-6 md:gap-8">
           <div className="flex gap-6">
             <Link
+              data-theme={theme ?? "dark"}
               href="/sign-in"
-              className="hidden rounded-full border border-stone-100 px-3.5 py-2 font-medium leading-4 text-stone-100 lg:block"
+              className="hidden rounded-full border px-3.5 py-2 font-medium leading-4 data-[theme=crystal-dark]:border-stone-100 data-[theme=dark]:border-stone-100 data-[theme=light]:border-stone-800 data-[theme=crystal-dark]:text-stone-100 data-[theme=dark]:text-stone-100 data-[theme=light]:text-stone-800 lg:block"
             >
               Login
             </Link>
             <Link
+              data-theme={theme ?? "dark"}
               href="/sign-up"
-              className="hidden rounded-full border border-stone-100 bg-stone-100 px-3.5 py-2 font-medium leading-4 text-stone-800 md:block"
+              className="hidden rounded-full border px-3.5 py-2 font-medium leading-4 data-[theme=crystal-dark]:border-stone-100 data-[theme=dark]:border-stone-100 data-[theme=light]:border-stone-800 data-[theme=crystal-dark]:bg-stone-100 data-[theme=dark]:bg-stone-100 data-[theme=light]:bg-stone-800 data-[theme=crystal-dark]:text-stone-800 data-[theme=dark]:text-stone-800 data-[theme=light]:text-stone-50 md:block"
             >
               Sign Up
             </Link>
@@ -52,8 +63,16 @@ export default function Navbar({ theme }: Props) {
           </Link>
           <Link href="/cart" className="relative">
             <ShoppingBag size={24} strokeWidth={1.5} absoluteStrokeWidth={false} />
-            <div className="absolute left-2.5 top-2.5 flex h-5 w-5 items-center justify-center rounded-full bg-stone-100">
-              <span className="text-sm font-medium leading-none text-stone-800">2</span>
+            <div
+              data-theme={theme ?? "dark"}
+              className="absolute left-2.5 top-2.5 flex h-5 w-5 items-center justify-center rounded-full data-[theme=crystal-dark]:bg-stone-100 data-[theme=dark]:bg-stone-100 data-[theme=light]:bg-stone-800"
+            >
+              <span
+                data-theme={theme ?? "dark"}
+                className="text-sm font-medium leading-none data-[theme=crystal-dark]:text-stone-800 data-[theme=dark]:text-stone-800 data-[theme=light]:text-stone-50"
+              >
+                2
+              </span>
             </div>
           </Link>
           <MenuButton />

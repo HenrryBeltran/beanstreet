@@ -1,4 +1,4 @@
-"use server";
+import { Try } from "@/utils/try";
 
 export type SelectedCoffees = {
   result: Item[];
@@ -14,26 +14,26 @@ export type Item = {
   section_slug: string;
 };
 
-export default async function getSelectedItems(
-  type: string,
-): Promise<SelectedCoffees | null> {
-  let response: Response;
+type GetHandler = (type: string) => Promise<SelectedCoffees | null>;
 
-  try {
-    response = await fetch(`${process.env.API_URL}/item/selected/${type}`, {
+export const getSelectedItems: GetHandler = async type => {
+  const { error: fetchError, result: response } = await Try(
+    fetch(`${process.env.API_URL}/item/selected/${type}`, {
       next: { revalidate: 60 },
-    });
-  } catch (error) {
-    console.log("~ Fetch Error: Failed to get selected coffees", error);
+    }),
+  );
+
+  if (fetchError) {
+    console.error("~ Fetch Error: Failed to get selected coffees", fetchError);
     return null;
   }
 
-  const data: SelectedCoffees | undefined = await response.json();
+  const { error: parseError, result: data } = await Try<SelectedCoffees>(response.json());
 
-  if (!data) {
+  if (parseError) {
     console.error("~ Server Error: Failed to parse selected coffees data");
     return null;
   }
 
   return data;
-}
+};

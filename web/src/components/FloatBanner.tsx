@@ -1,28 +1,9 @@
+import { getMainOffer } from "@/lib/getMainOffer";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { ChevronRight, Divide } from "lucide-react";
-
-type Offer = {
-  result: {
-    name: string;
-    slug: string;
-    description: string;
-    discount: number;
-    offerType: string[];
-  };
-};
 
 export default async function FloatBanner() {
-  let data: Offer | undefined;
-
-  try {
-    const response = await fetch(`${process.env.API_URL}/offer/main`, {
-      next: { revalidate: 60 },
-    });
-
-    data = await response.json();
-  } catch (error) {
-    return <div />;
-  }
+  const data = await getMainOffer();
 
   if (!data) {
     return <div />;
