@@ -32,7 +32,7 @@ export const getSelectedItems: GetHandler = async type => {
 
   if (parseError) {
     console.error("~ Server Error: Failed to parse selected coffees data");
-    return null;
+    return data as SelectedCoffees;
   }
 
   return data;
