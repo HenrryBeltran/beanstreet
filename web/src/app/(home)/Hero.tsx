@@ -1,13 +1,13 @@
 import FloatBanner from "@/components/FloatBanner";
 import LinkButton from "@/components/LinkButton";
 import Navbar from "@/components/Navbar";
+import { Facebook, Instagram, TikTok, Twitter, Youtube } from "@/components/SocialIcons";
 import Clipboard from "@/components/client/Clipboard";
 import { ChevronsDown } from "lucide-react";
 import Image from "next/image";
-import beanStreetHero from "../../../public/bean-street-hero.jpg";
-import { Facebook, Instagram, TikTok, Twitter, Youtube } from "@/components/SocialIcons";
 import Link from "next/link";
 import { Suspense } from "react";
+import beanStreetHero from "../../../public/bean-street-hero.jpg";
 
 export default function Hero() {
   return (

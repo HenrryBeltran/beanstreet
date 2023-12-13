@@ -23,7 +23,7 @@ export const getSelectedItems: GetHandler = async type => {
     }),
   );
 
-  if (fetchError) {
+  if (fetchError || !response) {
     console.error("~ Fetch Error: Failed to get selected coffees", fetchError);
     return null;
   }
