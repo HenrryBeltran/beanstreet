@@ -1,8 +1,10 @@
 "use client";
 
 import { formSchema } from "@/utils/schemas";
+import { Try } from "@/utils/try";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronRight, Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,17 +15,54 @@ type Inputs = z.infer<typeof loginFormSchema>;
 export default function SignInForm() {
   const [revealPassword, setRevealPassword] = useState(false);
   const submitBtnRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setValue,
+    setError,
   } = useForm<Inputs>({
     resolver: zodResolver(loginFormSchema),
   });
 
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async data => {
+    const { email, password } = data;
+
+    const { error, result: response } = await Try(
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/sign-in`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      }),
+    );
+
+    if (!response) {
+      console.error(error);
+      return;
+    }
+
+    const { error: parseError, result } = await Try<{
+      message: string;
+      path: "email" | null;
+    }>(response.json());
+
+    if (parseError) {
+      console.error(parseError);
+      return;
+    }
+
+    if (!response.ok) {
+      setError(result.path ?? "root", { message: result.message });
+      return;
+    }
+
+    router.replace("/shop");
+  };
 
   const setUserHandler = ({ email, password }: { email: string; password: string }) => {
     setValue("email", email);
@@ -123,7 +162,8 @@ export default function SignInForm() {
           </p>
         </div>
         <button
-          className="w-full select-none rounded-full bg-stone-800 py-3.5 text-lg font-medium leading-none text-stone-100"
+          disabled={isSubmitting}
+          className="w-full select-none rounded-full bg-stone-800 py-3.5 text-lg font-medium leading-none text-stone-100 disabled:cursor-wait disabled:bg-stone-500"
           ref={submitBtnRef}
           type="submit"
         >
