@@ -13,10 +13,8 @@ const SignInCredentialsSchema = InsertUserSchema.partial({ name: true }).pick({
 const cookieOptions: CookieOptions = {
   path: "/",
   httpOnly: true,
-  domain: ".localhost",
-  secure: false,
-  // sameSite: "strict",
-  // sameSite: "none",
+  domain: process.env.DOMAIN,
+  secure: process.env.NODE_ENVIRONMENT === "production",
   maxAge: 1000 * 60 * 60 * 24 * 92,
 };
 
