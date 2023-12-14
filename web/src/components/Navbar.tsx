@@ -14,7 +14,7 @@ export default function Navbar({ theme = "dark", crystal = false }: Props) {
     <nav
       data-theme={theme}
       data-crystal={crystal}
-      className="h-12 px-6 data-[crystal=true]:bg-transparent data-[theme=dark]:bg-stone-950/70 data-[theme=light]:bg-stone-50 md:h-[60px]"
+      className="h-12 px-6 data-[crystal=true]:bg-transparent data-[theme=dark][crystal=false]:bg-stone-950/70 data-[theme=light]:bg-stone-50 md:h-[60px]"
     >
       <div
         data-theme={theme}

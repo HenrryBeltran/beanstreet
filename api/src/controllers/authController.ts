@@ -18,13 +18,6 @@ const cookieOptions: CookieOptions = {
   maxAge: 1000 * 60 * 60 * 24 * 92,
 };
 
-// path: "/",
-// httpOnly: true, // Accessible only by web server
-// domain:
-//   process.env.NODE_ENVIRONMENT === "development" ? ".localhost" : ".henrryb.site",
-// secure: process.env.NODE_ENVIRONMENT === "development" ? false : true,
-// maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expiry: set to match refresh token
-
 export const signIn: RequestHandler = async (req, res) => {
   const validatedCredentials = SignInCredentialsSchema.safeParse(req.body);
 
