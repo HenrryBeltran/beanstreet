@@ -14,9 +14,7 @@ type GetHandler = () => Promise<Offer | null>;
 
 export const getMainOffer: GetHandler = async () => {
   const { error: fetchError, result: response } = await Try(
-    fetch(`${process.env.API_URL}/offer/main`, {
-      next: { revalidate: 60 },
-    }),
+    fetch(`${process.env.API_URL}/offer/main`, { cache: "no-store" }),
   );
 
   if (!response) {

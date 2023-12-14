@@ -1,13 +1,8 @@
 import { getMainOffer } from "@/lib/getMainOffer";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import os from "node:os";
-import { headers } from "next/headers";
 
 export default async function FloatBanner() {
-  console.log("~ OS -", os.hostname());
-  console.log("~ Host -", headers().get("host"));
-
   const data = await getMainOffer();
 
   if (!data) {
