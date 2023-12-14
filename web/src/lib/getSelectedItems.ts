@@ -17,13 +17,16 @@ export type Item = {
 type GetHandler = (type: string) => Promise<SelectedCoffees | null>;
 
 export const getSelectedItems: GetHandler = async type => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/item/selected/${type}`,
-    {
-      next: { revalidate: 60 },
-    },
-  );
-  const data = await response.json();
+  // const response = await fetch(
+  //   `${process.env.NEXT_PUBLIC_API_URL}/item/selected/${type}`,
+  //   {
+  //     next: { revalidate: 60 },
+  //   },
+  // );
+  // const data = await response.json();
+
+  console.log(`~ public API: ${process.env.NEXT_PUBLIC_API_URL}/item/selected/${type}`);
+  console.log(`~ server API: ${process.env.API_URL}/item/selected/${type}`);
 
   // const { error: fetchError, result: response } = await Try(
   //   fetch(`${process.env.NEXT_PUBLIC_API_URL}/item/selected/${type}`, {
@@ -43,5 +46,5 @@ export const getSelectedItems: GetHandler = async type => {
   //   return null;
   // }
 
-  return data;
+  return null;
 };
