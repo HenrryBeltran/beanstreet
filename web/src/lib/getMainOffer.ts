@@ -13,11 +13,11 @@ export type Offer = {
 type GetHandler = () => Promise<Offer | null>;
 
 export const getMainOffer: GetHandler = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/offer/main`, {
-    next: { revalidate: 60 },
-  });
-  const data = await response.json();
-  return data;
+  // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/offer/main`, {
+  //   next: { revalidate: 60 },
+  // });
+  // const data = await response.json();
+  return null;
 
   // const { error: fetchError, result: response } = await Try(
   //   fetch(`${process.env.API_URL}/offer/main`, {
