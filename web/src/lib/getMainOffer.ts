@@ -1,4 +1,4 @@
-// import { Try } from "@/utils/try";
+import { Try } from "@/utils/try";
 
 export type Offer = {
   result: {
@@ -13,31 +13,25 @@ export type Offer = {
 type GetHandler = () => Promise<Offer | null>;
 
 export const getMainOffer: GetHandler = async () => {
-  // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/offer/main`, {
-  //   next: { revalidate: 60 },
-  // });
-  // const data = await response.json();
-  return null;
+  const { error: fetchError, result: response } = await Try(
+    fetch(`${process.env.API_URL}/offer/main`, {
+      next: { revalidate: 60 },
+    }),
+  );
 
-  // const { error: fetchError, result: response } = await Try(
-  //   fetch(`${process.env.API_URL}/offer/main`, {
-  //     next: { revalidate: 60 },
-  //   }),
-  // );
-  //
-  // if (!response) {
-  //   console.log("~ RESPONSE:", JSON.stringify(response));
-  //   console.log("~ Fetch Error: Failed to fetch main offer error.", fetchError);
-  //   return null;
-  // }
-  //
-  // const { error: parseError, result: data } = await Try<Offer>(response.json());
-  //
-  // if (parseError) {
-  //   console.log("~ DATA:", JSON.stringify(data));
-  //   console.error("~ Server Error: Failed to parse main offer error.", parseError);
-  //   return null;
-  // }
-  //
-  // return data;
+  if (!response) {
+    console.log("~ RESPONSE:", JSON.stringify(response));
+    console.log("~ Fetch Error: Failed to fetch main offer error.", fetchError);
+    return null;
+  }
+
+  const { error: parseError, result: data } = await Try<Offer>(response.json());
+
+  if (parseError) {
+    console.log("~ DATA:", JSON.stringify(data));
+    console.error("~ Server Error: Failed to parse main offer error.", parseError);
+    return null;
+  }
+
+  return data;
 };

@@ -14,7 +14,7 @@
     "@hookform/resolvers": "^3.3.2",
     "@tanstack/react-query": "^5.13.4",
     "@tanstack/react-query-devtools": "^5.13.5",
-    "lucide-react": "^0.294.0",
+    "lucide-react": "^0.295.0",
     "motion": "^10.16.4",
     "next": "14.0.4",
     "react": "^18",

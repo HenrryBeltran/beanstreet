@@ -1,25 +1,9 @@
+import { getSelectedItems } from "@/lib/getSelectedItems";
 import CarouselCard from "./CarouselCard";
 import CarouselScroll from "./CarouselScroll";
 
-export type SelectedCoffees = {
-  result: Item[];
-};
-
-export type Item = {
-  name: string;
-  slug: string;
-  price: string;
-  price_w_discount: string | null;
-  discount: number | null;
-  section_name: string;
-  section_slug: string;
-};
-
 export default async function CarouselContainer({ type }: { type: "drinks" | "food" }) {
-  const res = await fetch(`${process.env.API_URL}/item/selected/${type}`, {
-    next: { revalidate: 60 },
-  });
-  const data: SelectedCoffees = await res.json();
+  const data = await getSelectedItems(type);
 
   if (!data) {
     return (
