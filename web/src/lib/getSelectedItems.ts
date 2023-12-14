@@ -23,15 +23,15 @@ export const getSelectedItems: GetHandler = async type => {
     }),
   );
 
-  if (fetchError || !response) {
-    console.error("~ Fetch Error: Failed to get selected coffees", fetchError);
+  if (!response) {
+    console.error("~ Fetch Error: Failed to get selected coffees.", fetchError);
     return null;
   }
 
   const { error: parseError, result: data } = await Try<SelectedCoffees>(response.json());
 
   if (parseError) {
-    console.error("~ Server Error: Failed to parse selected coffees data");
+    console.error("~ Server Error: Failed to parse selected coffees data.", parseError);
     return null;
   }
 

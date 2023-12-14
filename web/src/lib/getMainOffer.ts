@@ -19,13 +19,15 @@ export const getMainOffer: GetHandler = async () => {
     }),
   );
 
-  if (fetchError) {
+  if (!response) {
+    console.log("~ Fetch Error: Failed to fetch main offer error.", fetchError);
     return null;
   }
 
   const { error: parseError, result: data } = await Try<Offer>(response.json());
 
   if (parseError) {
+    console.error("~ Server Error: Failed to parse main offer error.", parseError);
     return null;
   }
 
