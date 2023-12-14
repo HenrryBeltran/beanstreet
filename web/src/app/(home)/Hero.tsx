@@ -76,7 +76,7 @@ export default function Hero() {
           </Link>
         </div>
       </div>
-      <Navbar theme="crystal-dark" />
+      <Navbar theme="dark" crystal={true} />
       <Suspense>
         <FloatBanner />
       </Suspense>
