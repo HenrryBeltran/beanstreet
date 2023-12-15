@@ -13,6 +13,9 @@ const port = process.env.PORT ?? 3500;
 
 export const app = express();
 
+app.enable("trust proxy");
+app.disable("x-powered-by");
+
 app.use(
   cors({
     origin(origin, callback) {
