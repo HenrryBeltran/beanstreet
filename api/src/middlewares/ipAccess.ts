@@ -1,19 +1,12 @@
 import type { RequestHandler } from "express";
 
-const allowedIPS = process.env.ALLOWED_IPS?.split(",");
+const notAllowedIPS = ["127.0.0.1", "::1", "192.168.18.1"];
 
 export const ipAccess: RequestHandler = (req, res, next) => {
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-  console.log("~ IP -", ip);
-  console.log("~ Origin -", req.headers.origin);
+  const ipList = typeof ip === "string" ? [ip] : ip;
 
-  if (typeof ip === "string") {
-    if (allowedIPS?.includes(ip)) {
-      next();
-    } else {
-      res.status(401).end("Not Allowed");
-    }
-  } else if (allowedIPS?.some(value => ip?.includes(value))) {
+  if (ipList?.some(value => notAllowedIPS.includes(value))) {
     res.status(401).end("Not Allowed");
   } else {
     next();
