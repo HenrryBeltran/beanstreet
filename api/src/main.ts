@@ -7,8 +7,9 @@ import { router as cartRouter } from "./routes/cart.js";
 import { router as itemRouter } from "./routes/item.js";
 import { router as offerRouter } from "./routes/offer.js";
 import { router as userRouter } from "./routes/user.js";
+import { corsOptions } from "./middlewares/corsOptions.js";
+import { ipAccess } from "./middlewares/ipAccess.js";
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",");
 const port = process.env.PORT ?? 3500;
 
 export const app = express();
@@ -16,19 +17,8 @@ export const app = express();
 app.enable("trust proxy");
 app.disable("x-powered-by");
 
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin || allowedOrigins?.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error(`Not allowed by CORS in origin ${origin}`));
-      }
-    },
-    credentials: true,
-    optionsSuccessStatus: 200,
-  }),
-);
+app.use(cors(corsOptions));
+app.use(ipAccess);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
