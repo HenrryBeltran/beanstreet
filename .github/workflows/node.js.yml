@@ -33,7 +33,7 @@ jobs:
           touch .env
           echo "${{ secrets.PRODUCTION_ENV }}" > .env
 
-      - name: Restart pm2 Backend API
+      - name: Restart pm2 Server API
         run: |
           npm i -g pm2 
-          pm2 restart BackendAPI
+          pm2 restart ServerAPI
