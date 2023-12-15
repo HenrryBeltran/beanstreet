@@ -13,29 +13,32 @@ const port = process.env.PORT ?? 3500;
 
 export const app = express();
 
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins?.includes(origin!)) {
+    res.header("Access-Control-Allow-Credentials", "true");
+  }
+  console.log("~ Origin", origin);
+  next();
+});
 app.use(
   cors({
     origin(requestOrigin, callback) {
-      function checkOrgin() {
-        if (process.env.NODE_ENVIRONMENT === "development") {
-          return !requestOrigin;
-        }
-        return false;
-      }
+      console.log("~ Request origin", requestOrigin);
 
-      if (checkOrgin() || allowedOrigins?.includes(requestOrigin!)) {
+      if (allowedOrigins?.includes(requestOrigin!)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
     },
     credentials: true,
-    optionsSuccessStatus: 200,
+    optionsSuccessStatus: 201,
   }),
 );
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.get("/api", (_, res) => res.json({ message: "Hi from Beanstreet Api!" }));
@@ -46,7 +49,7 @@ app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 
 app.use("/api/*", (_req, res) => {
-  res.status(404).json({ message: "Api route not found" });
+  res.status(405).json({ message: "Api route not found" });
 });
 
 app.listen(port, () => console.log(`~ Running on ${process.env.SITE_URL}:${port}`));
