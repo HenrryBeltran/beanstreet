@@ -13,27 +13,17 @@ const port = process.env.PORT ?? 3500;
 
 export const app = express();
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins?.includes(origin!)) {
-    res.header("Access-Control-Allow-Credentials", "true");
-  }
-  console.log("~ Origin", origin);
-  next();
-});
 app.use(
   cors({
-    origin(requestOrigin, callback) {
-      console.log("~ Request origin", requestOrigin);
-
-      if (allowedOrigins?.includes(requestOrigin!)) {
+    origin(origin, callback) {
+      if (!origin || allowedOrigins?.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        callback(new Error(`Not allowed by CORS in origin ${origin}`));
       }
     },
     credentials: true,
-    optionsSuccessStatus: 201,
+    optionsSuccessStatus: 200,
   }),
 );
 
