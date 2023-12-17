@@ -1,3 +1,4 @@
+import Providers from "@/utils/Providers";
 import type { Metadata } from "next";
 import { Libre_Bodoni, Poppins } from "next/font/google";
 import "./globals.css";
@@ -14,10 +15,16 @@ export const metadata: Metadata = {
   description: "Project Website of a Coffe Shop called Bean Street",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+type Props = {
+  children: React.ReactNode;
+};
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={`${poppins.variable} ${bodoni.variable}`}>
-      {children}
+      <body className="bg-stone-50">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

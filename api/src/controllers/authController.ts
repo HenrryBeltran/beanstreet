@@ -181,6 +181,7 @@ export const logout: RequestHandler = async (req, res) => {
 };
 
 export const getSession: RequestHandler = async (req, res) => {
+  let foundUser: SelectUser;
   try {
     const { foundUserSession, message, status, error } = await authentication(
       req.cookies,
@@ -189,11 +190,15 @@ export const getSession: RequestHandler = async (req, res) => {
     if (!foundUserSession) {
       return res.status(status).json({ message, error });
     }
+
+    foundUser = foundUserSession;
   } catch (error) {
     return res.sendStatus(500);
   }
 
-  return res.status(200).json({ message: "Found user session" });
+  return res
+    .status(200)
+    .json({ user: { name: foundUser.name }, message: "Found user session" });
 };
 
 export const authentication = async (cookies: { sid: string } | undefined) => {

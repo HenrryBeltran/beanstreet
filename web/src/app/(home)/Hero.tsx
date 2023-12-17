@@ -13,14 +13,14 @@ export default function Hero() {
   return (
     <section className="relative flex min-h-[100svh] flex-col bg-stone-950/60">
       <Image
-        className="absolute top-0 -z-50 h-[100svh] object-cover object-center"
+        className="absolute top-0 -z-20 h-[100svh] object-cover object-center"
         src={beanStreetHero}
         alt="Hero Bean Street Cover"
         placeholder="blur"
         priority={true}
         quality={80}
         fill
-        sizes="100dvh"
+        sizes="100svh"
       />
       <div className="absolute bottom-24 left-6 hidden flex-col items-center gap-8 text-stone-300 md:flex">
         <Clipboard

@@ -3,6 +3,7 @@
 import { formSchema } from "@/utils/schemas";
 import { Try } from "@/utils/try";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { ChevronRight, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -16,6 +17,7 @@ export default function SignInForm() {
   const [revealPassword, setRevealPassword] = useState(false);
   const submitBtnRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -61,6 +63,8 @@ export default function SignInForm() {
       return;
     }
 
+    queryClient.invalidateQueries({ queryKey: ["session"] });
+
     router.replace("/shop");
   };
 
@@ -75,10 +79,10 @@ export default function SignInForm() {
       <div className="relative mb-12 flex w-fit whitespace-nowrap text-sm leading-none text-stone-500">
         <p className="peer">
           Use an example{" "}
-          <span className="peer cursor-pointer text-stone-700">
+          <span className="group peer cursor-pointer select-none text-stone-700 tap-highlight-transparent">
             account
             <ChevronRight
-              className="inline-block"
+              className="inline-block transition-transform group-hover:rotate-90"
               absoluteStrokeWidth
               strokeWidth={1.5}
               size={16}

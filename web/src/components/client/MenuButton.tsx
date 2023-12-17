@@ -2,7 +2,7 @@
 
 import { TimelineDefinition, stagger, timeline } from "motion";
 import { useRef, useState } from "react";
-import DropDownMenu from "./DropDownMenu";
+import DropdownMenu from "./DropdownMenu";
 
 const openSequence: TimelineDefinition = [
   ["#drop-down", { visibility: "visible" }, { duration: 0 }],
@@ -65,7 +65,7 @@ export default function MenuButton({ theme }: Props) {
 
   return (
     <div className="relative h-6 w-6 md:hidden">
-      <DropDownMenu theme={theme} isOpen={isOpen} />
+      <DropdownMenu theme={theme} isOpen={isOpen} />
       <button
         className="relative z-50 tap-highlight-transparent"
         onClick={handleOnClick}
