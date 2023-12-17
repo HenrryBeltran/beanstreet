@@ -172,9 +172,12 @@ export const logout: RequestHandler = async (req, res) => {
       .json({ message: "Database Error: Failed to update user session", error });
   }
 
+  const clearCookieOption = cookieOptions;
+  delete clearCookieOption.maxAge;
+
   return res
     .clearCookie("sid", {
-      ...cookieOptions,
+      ...clearCookieOption,
       expires: new Date(1970, 2, 1),
     })
     .json({ message: "Successfully logout" });

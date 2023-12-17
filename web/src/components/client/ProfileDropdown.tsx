@@ -2,10 +2,9 @@
 
 import { logout } from "@/lib/logout";
 import { Menu } from "@headlessui/react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { CircleUserRound, LogOut, Settings } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
 
 type Props = {
   theme: "dark" | "light";
@@ -13,23 +12,17 @@ type Props = {
 };
 
 export default function ProfileDropdown({ theme, username }: Props) {
-  const queryClient = useQueryClient();
-
-  const { data, refetch } = useQuery({
+  const { data, refetch, isSuccess } = useQuery({
     queryFn: logout,
     queryKey: ["session"],
     enabled: false,
   });
 
-  useEffect(() => {
-    if (data === 200) {
-      queryClient.invalidateQueries({ queryKey: ["session"] });
-    }
-  }, [data, queryClient]);
-
-  function handleLogout() {
-    refetch();
+  if (isSuccess && data === 200) {
+    window.location.reload();
   }
+
+  const handleLogout = () => refetch();
 
   return (
     <Menu as="div" className="relative h-6 w-6">

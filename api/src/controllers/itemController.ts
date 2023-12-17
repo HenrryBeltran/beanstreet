@@ -99,6 +99,38 @@ export const getAllItems: RequestHandler = async (req, res) => {
   }
 };
 
+export const getAllCountItems: RequestHandler = async (_, res) => {
+  try {
+    const result = (await db.execute(sql`
+      SELECT COUNT(section_slug) FROM (
+        (SELECT
+          section_slug
+        FROM drink)
+          
+        UNION ALL
+          
+        (SELECT
+          section_slug
+        FROM sandwich)
+          
+        UNION ALL
+          
+        (SELECT
+          section_slug
+        FROM pastrie)
+      ) AS items;
+    `)) as {
+      count: number;
+    }[];
+
+    return res.json({ count: result[0]?.count });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Database Error: Failed to get items", error });
+  }
+};
+
 export const getItemsBySection: RequestHandler = async (req, res) => {
   const slug = req.params.slug;
   const sort = req.query.sort as "price" | undefined;
@@ -196,6 +228,41 @@ export const getItemsBySection: RequestHandler = async (req, res) => {
       result: sort ? resultOrder(sort, direction ?? "asc") : result,
       count: result.length,
     });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Database Error: Failed to get items", error });
+  }
+};
+
+export const getCountItemsBySection: RequestHandler = async (req, res) => {
+  const slug = req.params.slug;
+
+  try {
+    const result = (await db.execute(sql`
+      SELECT COUNT(section_slug) FROM (
+        (SELECT
+          section_slug
+        FROM drink)
+          
+        UNION ALL
+          
+        (SELECT
+          section_slug
+        FROM sandwich)
+          
+        UNION ALL
+          
+        (SELECT
+          section_slug
+        FROM pastrie)
+      ) AS items
+      WHERE section_slug = ${slug};
+    `)) as {
+      count: number;
+    }[];
+
+    return res.json({ count: result[0]?.count });
   } catch (error) {
     return res
       .status(500)

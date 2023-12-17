@@ -13,6 +13,7 @@ export default function Profile({ theme }: Props) {
   const { data, isLoading } = useQuery({
     queryFn: getSession,
     queryKey: ["session"],
+    staleTime: Infinity,
   });
 
   if (isLoading) {

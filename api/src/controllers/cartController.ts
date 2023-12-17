@@ -7,10 +7,9 @@ import { InsertItemOrderSchema, itemOrder, user } from "../drizzle/schemas.js";
 const cookieOptions: CookieOptions = {
   path: "/",
   httpOnly: true,
-  secure: process.env.NODE_DEVELOPMENT === "production",
   domain: process.env.DOMAIN,
-  sameSite: "none",
-  expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30 * 12),
+  secure: process.env.NODE_DEVELOPMENT === "production",
+  maxAge: 1000 * 60 * 60 * 24 * 30 * 12,
 };
 
 export const getAllItemsFromCart: RequestHandler = async (req, res) => {

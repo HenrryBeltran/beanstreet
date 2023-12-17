@@ -1,6 +1,8 @@
 import { Router } from "express";
 import {
+  getAllCountItems,
   getAllItems,
+  getCountItemsBySection,
   getDrinkBySlug,
   getItemsBySection,
   getPastrieBySlug,
@@ -12,7 +14,9 @@ import {
 export const router = Router();
 
 router.get("/", getAllItems);
+router.get("/count", getAllCountItems);
 router.get("/section/:slug", getItemsBySection);
+router.get("/section/count/:slug", getCountItemsBySection);
 router.get("/selected/drinks", getSelectedDrinks);
 router.get("/selected/food", getSelectedFood);
 router.get("/drink/:slug", getDrinkBySlug);

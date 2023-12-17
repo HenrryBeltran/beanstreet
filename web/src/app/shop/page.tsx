@@ -1,10 +1,13 @@
+import Banner from "@/components/Banner";
 import Navbar from "@/components/Navbar";
+import ShopContainer from "./ShopContainer";
 
 export default function ShopPage() {
   return (
-    <main className="bg-stone-500">
+    <main>
       <Navbar theme="light" />
-      <h1>Shop Page</h1>
+      <Banner theme="light" />
+      <ShopContainer />
     </main>
   );
 }

@@ -1,5 +1,7 @@
 "use client";
 
+import { getSession } from "@/lib/getSession";
+import { useQuery } from "@tanstack/react-query";
 import { timeline } from "motion";
 import Link from "next/link";
 import { MouseEventHandler, ReactNode } from "react";
@@ -11,6 +13,12 @@ type Props = {
 };
 
 export default function NavDropdownMenu({ theme }: Props) {
+  const { data } = useQuery({
+    queryFn: getSession,
+    queryKey: ["session"],
+    staleTime: Infinity,
+  });
+
   const handleMouseOver: MouseEventHandler = e => {
     const link = e.currentTarget.querySelector(".item");
     const mark = e.currentTarget.querySelector(".mark");
@@ -75,24 +83,28 @@ export default function NavDropdownMenu({ theme }: Props) {
         >
           About Us
         </MenuLink>
-        <MenuLink
-          className="drop-down-li"
-          href="/sign-in"
-          theme={theme}
-          onMouseOver={handleMouseOver}
-          onMouseLeave={handleMouseLeave}
-        >
-          Sign In
-        </MenuLink>
-        <MenuLink
-          className="drop-down-li"
-          href="/sign-up"
-          theme={theme}
-          onMouseOver={handleMouseOver}
-          onMouseLeave={handleMouseLeave}
-        >
-          Sign Up
-        </MenuLink>
+        {!data && (
+          <>
+            <MenuLink
+              className="drop-down-li"
+              href="/sign-in"
+              theme={theme}
+              onMouseOver={handleMouseOver}
+              onMouseLeave={handleMouseLeave}
+            >
+              Sign In
+            </MenuLink>
+            <MenuLink
+              className="drop-down-li"
+              href="/sign-up"
+              theme={theme}
+              onMouseOver={handleMouseOver}
+              onMouseLeave={handleMouseLeave}
+            >
+              Sign Up
+            </MenuLink>
+          </>
+        )}
         <MenuLink
           className="drop-down-li"
           href="/cart"
@@ -117,9 +129,19 @@ type LinkProps = {
 };
 
 function MenuLink(props: LinkProps) {
+  function handleClick() {
+    const body = document.querySelector("body");
+
+    if (body) {
+      body.style.height = "auto";
+      body.style.overflow = "visible";
+    }
+  }
+
   return (
     <li
       className="relative text-4xl font-medium"
+      onClick={handleClick}
       onMouseOver={props.onMouseOver}
       onMouseLeave={props.onMouseLeave}
     >
