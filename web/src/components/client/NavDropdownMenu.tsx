@@ -10,7 +10,7 @@ type Props = {
   isOpen?: boolean; // Check if this is going to stay here
 };
 
-export default function DropdownMenu({ theme }: Props) {
+export default function NavDropdownMenu({ theme }: Props) {
   const handleMouseOver: MouseEventHandler = e => {
     const link = e.currentTarget.querySelector(".item");
     const mark = e.currentTarget.querySelector(".mark");

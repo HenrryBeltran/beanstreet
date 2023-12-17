@@ -2,7 +2,7 @@
 
 import { TimelineDefinition, stagger, timeline } from "motion";
 import { useRef, useState } from "react";
-import DropdownMenu from "./DropdownMenu";
+import DropdownMenu from "./NavDropdownMenu";
 
 const openSequence: TimelineDefinition = [
   ["#drop-down", { visibility: "visible" }, { duration: 0 }],
