@@ -89,8 +89,8 @@ export default function SignInForm() {
             />
           </span>
         </p>
-        <ul className="invisible absolute left-1/2 top-full block -translate-x-1/2 space-y-4 rounded-md bg-stone-50 p-6 pt-8 text-start opacity-0 shadow-2xl transition-opacity duration-300 ease-in hover:visible hover:opacity-100 peer-hover:visible peer-hover:opacity-100">
-          <li className="space-y-2">
+        <ul className="invisible absolute left-1/2 top-full block -translate-x-1/2 space-y-4 rounded-md bg-stone-50 p-4 pt-6 text-start opacity-0 shadow-2xl transition-opacity duration-300 ease-in hover:visible hover:opacity-100 peer-hover:visible peer-hover:opacity-100">
+          <li className="space-y-3">
             <p className="text-stone-700">Use an user account</p>
             <button
               className="rounded-full bg-stone-800 px-3 py-1.5 leading-none text-stone-50 transition-colors hover:bg-stone-700"
@@ -99,20 +99,6 @@ export default function SignInForm() {
               }
             >
               User
-            </button>
-          </li>
-          <li className="space-y-2">
-            <p className="text-stone-700">Use an manager account</p>
-            <button
-              className="rounded-full bg-stone-800 px-3 py-1.5 leading-none text-stone-50 transition-colors hover:bg-stone-700"
-              onClick={() =>
-                setUserHandler({
-                  email: "manager@example.com",
-                  password: "beanstreet123",
-                })
-              }
-            >
-              Manager
             </button>
           </li>
         </ul>

@@ -36,7 +36,7 @@ export default function ProfileDropdown({ theme, username }: Props) {
       <Menu.Items
         as="ul"
         data-theme={theme}
-        className="absolute -right-4 top-full mt-4 flex flex-col items-start rounded-md py-2 text-sm font-medium shadow-xl outline-none data-[theme=dark]:bg-stone-800 data-[theme=light]:bg-stone-200 data-[theme=dark]:shadow-stone-900/40 data-[theme=light]:shadow-stone-600/25"
+        className="absolute -right-4 top-full z-30 mt-4 flex flex-col items-start rounded-md py-2 text-sm font-medium shadow-xl outline-none data-[theme=dark]:bg-stone-800 data-[theme=light]:bg-stone-200 data-[theme=dark]:shadow-stone-900/40 data-[theme=light]:shadow-stone-600/25"
       >
         <Menu.Item
           as="li"
