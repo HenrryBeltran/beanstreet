@@ -1,4 +1,5 @@
 import { Item } from "@/lib/getAllItems";
+import { staticImages } from "@/utils/staticImages";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,11 +12,15 @@ export default function ItemCard({ item }: Props) {
     <li className="relative w-full">
       <Link
         className="group relative block w-full space-y-3 pb-3"
-        href={`/shop/${item.slug}`}
+        href={`/shop/item/${item.slug}`}
       >
         <div className="overflow-hidden">
           <Image
-            src={`${process.env.SITE_URL}/items/${item.slug}.jpg`}
+            // src={`${process.env.SITE_URL}/items/${item.slug}.jpg`}
+            src={
+              staticImages.find((itemImage) => itemImage.value === item.slug)?.img ??
+              `${process.env.SITE_URL}/items/${item.slug}.jpg`
+            }
             alt={item.name}
             quality={90}
             width={320}

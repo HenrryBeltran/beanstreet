@@ -15,11 +15,13 @@ export type Item = {
   discount: number | null;
 };
 
-type GetHandler<T> = (section: string) => Promise<T | null>;
+type GetHandler<T> = (section: string, searchParams?: string) => Promise<T | null>;
 
-export const getItemsBySection: GetHandler<Items> = async (section) => {
+export const getItemsBySection: GetHandler<Items> = async (section, searchParams) => {
+  const search = searchParams ?? "";
+
   const { error: fetchError, result: response } = await Try(
-    fetch(`${process.env.API_URL}/item/section/${section}`, {
+    fetch(`${process.env.API_URL}/item/section/${section}${search}`, {
       cache: "no-store",
       next: { tags: ["items"] },
     }),

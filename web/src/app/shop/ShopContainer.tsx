@@ -9,6 +9,7 @@ type Props = {
   title?: string;
   sectionSlug?: string;
   isASection?: boolean;
+  initialSearch?: string;
   getCount?: () => Promise<{ count: string } | null>;
   getItems?: () => Promise<Items | null>;
 };
@@ -17,6 +18,7 @@ export default async function ShopContainer({
   title,
   sectionSlug,
   isASection,
+  initialSearch,
   getCount,
   getItems,
 }: Props) {
@@ -27,7 +29,7 @@ export default async function ShopContainer({
         <Suspense fallback={<ShopTitleFallback title={title} />}>
           <ShopTitle title={title} getCount={getCount} />
         </Suspense>
-        <SortButton isASection={isASection ?? false} />
+        <SortButton isASection={isASection ?? false} initialSearch={initialSearch} />
       </div>
       <div className="flex gap-6 md:px-6 xl:mx-[var(--global-viewport-padding)] xl:gap-16 xl:px-0">
         <Sidenav isASection={isASection ?? false} section={sectionSlug} />

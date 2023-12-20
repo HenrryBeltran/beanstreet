@@ -30,9 +30,10 @@ const sortOption = [
 
 type Props = {
   isASection: boolean;
+  initialSearch?: string;
 };
 
-export default function SortButton({ isASection }: Props) {
+export default function SortButton({ isASection, initialSearch }: Props) {
   // Some trick code to change the sort options and the values;
   const defaultOption = isASection ? "name" : "default";
   const listSorOptions = isASection ? sortOption.slice(1) : sortOption;
@@ -46,7 +47,9 @@ export default function SortButton({ isASection }: Props) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const [selectedOption, setSelectedOption] = useState(listSorOptions[0]);
+  const [selectedOption, setSelectedOption] = useState(
+    listSorOptions.find((option) => option.value === initialSearch) ?? listSorOptions[0],
+  );
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);

@@ -19,10 +19,27 @@ export const generateStaticParams = async () =>
 
 type Props = {
   params: { section: string };
+  searchParams?: {
+    sort?: string;
+    d?: string;
+  };
 };
 
-export default function SectionShopPage({ params }: Props) {
+export default function SectionShopPage({ params, searchParams }: Props) {
   const title = sections.find((section) => section.slug === params.section)?.name;
+
+  let urlSearchParams: string | undefined;
+
+  if (searchParams?.sort !== undefined) {
+    urlSearchParams = "?" + new URLSearchParams(searchParams).toString();
+  } else {
+    urlSearchParams = undefined;
+  }
+
+  const initialSearch = searchParams?.sort?.concat(
+    searchParams?.d ? "-" : "",
+    searchParams?.d ?? "",
+  );
 
   return (
     <main>
@@ -32,8 +49,9 @@ export default function SectionShopPage({ params }: Props) {
         title={title}
         sectionSlug={params.section}
         isASection={true}
+        initialSearch={initialSearch}
         getCount={() => getItemsCountBySection(params.section)}
-        getItems={() => getItemsBySection(params.section)}
+        getItems={() => getItemsBySection(params.section, urlSearchParams)}
       />
       <div className="h-32 w-full" />
       <Footer />
