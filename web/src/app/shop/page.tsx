@@ -1,7 +1,7 @@
 import Banner from "@/components/Banner";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ShopContainer from "./ShopContainer";
-import Footer from "@/components/Footer";
 
 export default function ShopPage() {
   return (

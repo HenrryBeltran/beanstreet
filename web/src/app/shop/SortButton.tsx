@@ -28,17 +28,31 @@ const sortOption = [
   },
 ];
 
-export default function SortButton() {
+type Props = {
+  isASection: boolean;
+};
+
+export default function SortButton({ isASection }: Props) {
+  // Some trick code to change the sort options and the values;
+  const defaultOption = isASection ? "name" : "default";
+  const listSorOptions = isASection ? sortOption.slice(1) : sortOption;
+
+  if (isASection) {
+    listSorOptions[0].query = [];
+  } else {
+    listSorOptions[1].query = [{ key: "sort", value: "name" }];
+  }
+
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const [selectedOption, setSelectedOption] = useState(sortOption[0]);
+  const [selectedOption, setSelectedOption] = useState(listSorOptions[0]);
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
 
-    if (selectedOption.value !== "default") {
-      selectedOption.query.forEach(query => {
+    if (selectedOption.value !== defaultOption) {
+      selectedOption.query.forEach((query) => {
         params.set(query.key, query.value);
       });
     } else {
@@ -47,7 +61,7 @@ export default function SortButton() {
     }
 
     replace(`${pathname}?${params.toString()}`);
-  }, [selectedOption, searchParams, pathname, replace]);
+  }, [selectedOption, searchParams, pathname, replace, defaultOption]);
 
   return (
     <Listbox
@@ -74,7 +88,7 @@ export default function SortButton() {
         as="ul"
         className="absolute right-0 top-full mt-2 w-fit animate-[appear_0.24s_cubic-bezier(0.22,0.61,0.36,1)] whitespace-nowrap rounded-md bg-stone-200/60 py-2 text-sm text-stone-800 shadow-lg shadow-stone-700/30 outline-none backdrop-blur-lg md:text-base"
       >
-        {sortOption.map(option => (
+        {listSorOptions.map((option) => (
           <Listbox.Option key={option.id} value={option} as="li">
             {({ selected }) => (
               <button

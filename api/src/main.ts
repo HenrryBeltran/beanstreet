@@ -8,7 +8,6 @@ import { router as itemRouter } from "./routes/item.js";
 import { router as offerRouter } from "./routes/offer.js";
 import { router as userRouter } from "./routes/user.js";
 import { corsOptions } from "./middlewares/corsOptions.js";
-import { ipAccess } from "./middlewares/ipAccess.js";
 
 const port = process.env.PORT ?? 3500;
 
@@ -18,8 +17,6 @@ app.enable("trust proxy");
 app.disable("x-powered-by");
 
 app.use(cors(corsOptions));
-app.use(ipAccess);
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

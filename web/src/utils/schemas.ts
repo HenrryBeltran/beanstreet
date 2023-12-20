@@ -7,7 +7,7 @@ export const formSchema = z.object({
   email: z
     .string()
     .max(320, { message: "Your email must be less than 320 characters." })
-    .refine(value => value.length > 0, { message: "Email is required." }),
+    .refine((value) => value.length > 0, { message: "Email is required." }),
   password: z
     .string()
     .min(8, { message: "Your password must be at least 8 characters." })

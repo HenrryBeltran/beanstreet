@@ -16,7 +16,7 @@ export type Item = {
 
 type GetHandler = (type: string) => Promise<SelectedCoffees | null>;
 
-export const getSelectedItems: GetHandler = async type => {
+export const getSelectedItems: GetHandler = async (type) => {
   const { error: fetchError, result: response } = await Try(
     fetch(`${process.env.API_URL}/item/selected/${type}`, { next: { revalidate: 60 } }),
   );

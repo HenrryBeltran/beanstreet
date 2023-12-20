@@ -15,41 +15,44 @@ export type Item = {
   discount: number | null;
 };
 
-type GetHandler<T> = () => Promise<T | null>;
+type GetHandler<T> = (section: string) => Promise<T | null>;
 
-export const getAllItems: GetHandler<Items> = async () => {
+export const getItemsBySection: GetHandler<Items> = async (section) => {
   const { error: fetchError, result: response } = await Try(
-    fetch(`${process.env.API_URL}/item`, {
+    fetch(`${process.env.API_URL}/item/section/${section}`, {
       cache: "no-store",
       next: { tags: ["items"] },
     }),
   );
 
   if (!response) {
-    console.error("~ Fetch Error: Failed to get items.", fetchError);
+    console.error("~ Fetch Error: Failed to get items from a section.", fetchError);
     return null;
   }
 
   const { error: parseError, result: data } = await Try<Items>(response.json());
 
   if (parseError) {
-    console.error("~ Server Error: Failed to parse items data.", parseError);
+    console.error(
+      "~ Server Error: Failed to parse items data from a section.",
+      parseError,
+    );
     return null;
   }
 
   return data;
 };
 
-export const getAllCountItems: GetHandler<{ count: string }> = async () => {
+export const getItemsCountBySection: GetHandler<{ count: string }> = async (section) => {
   const { error: fetchError, result: response } = await Try(
-    fetch(`${process.env.API_URL}/item/count`, {
+    fetch(`${process.env.API_URL}/item/section/count/${section}`, {
       cache: "no-store",
       next: { tags: ["items", "count"] },
     }),
   );
 
   if (!response) {
-    console.error("~ Fetch Error: Failed to get items.", fetchError);
+    console.error("~ Fetch Error: Failed to get section.", fetchError);
     return null;
   }
 
@@ -58,7 +61,7 @@ export const getAllCountItems: GetHandler<{ count: string }> = async () => {
   );
 
   if (parseError) {
-    console.error("~ Server Error: Failed to parse items data.", parseError);
+    console.error("~ Server Error: Failed to parse section data.", parseError);
     return null;
   }
 

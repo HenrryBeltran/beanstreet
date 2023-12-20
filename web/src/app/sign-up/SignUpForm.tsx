@@ -17,7 +17,7 @@ const registerFormSchema = formSchema
       .max(32, { message: "Your password must be less than 32 characters." }),
   })
   .refine(
-    data => {
+    (data) => {
       return data.confirmPassword === data.password;
     },
     { message: "The passwords doesn't match.", path: ["confirmPassword"] },
@@ -40,7 +40,7 @@ export default function SignUpForm() {
     resolver: zodResolver(registerFormSchema),
   });
 
-  const onSubmit: SubmitHandler<Inputs> = async data => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { name, email, password } = data;
 
     const { error, result: response } = await Try(

@@ -1,17 +1,24 @@
 import { getAllCountItems } from "@/lib/getAllItems";
 
-export async function ShopTitle() {
-  const data = await getAllCountItems();
+type Props = {
+  title?: string;
+  getCount?: () => Promise<{ count: string } | null>;
+};
+
+export async function ShopTitle({ title, getCount = getAllCountItems }: Props) {
+  const data = await getCount();
 
   return (
-    <h1 className="font-serif text-3xl font-bold leading-none text-stone-800 lg:text-4xl">
-      All {data && `(${data.count})`}
+    <h1 className="font-serif text-3xl font-bold leading-none text-stone-800 md:text-4xl">
+      {title ?? "All"} {data && `(${data.count})`}
     </h1>
   );
 }
 
-export function ShopTitleFallback() {
+export function ShopTitleFallback({ title }: { title?: string }) {
   return (
-    <h1 className="font-serif text-4xl font-bold leading-none text-stone-800">All</h1>
+    <h1 className="font-serif text-3xl font-bold leading-none text-stone-800 md:text-4xl">
+      {title ?? "All"}
+    </h1>
   );
 }

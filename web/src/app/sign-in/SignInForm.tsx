@@ -29,7 +29,7 @@ export default function SignInForm() {
     resolver: zodResolver(loginFormSchema),
   });
 
-  const onSubmit: SubmitHandler<Inputs> = async data => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password } = data;
 
     const { error, result: response } = await Try(

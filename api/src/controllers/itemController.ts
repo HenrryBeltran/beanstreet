@@ -12,6 +12,8 @@ export const getAllItems: RequestHandler = async (req, res) => {
         (SELECT
           drink.name,
           drink.slug,
+          drink.section_name,
+          drink.section_slug,
           CAST(base_price + size.extra_cost + COALESCE(milk.extra_cost, 0.00) AS numeric(100, 2)) AS price,
           CAST((base_price + size.extra_cost + COALESCE(milk.extra_cost, 0.00)) * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
           offer.discount
@@ -35,6 +37,8 @@ export const getAllItems: RequestHandler = async (req, res) => {
         (SELECT
           sandwich.name, 
           sandwich.slug,
+          sandwich.section_name,
+          sandwich.section_slug,
           base_price AS price,
           CAST(base_price * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
           offer.discount
@@ -48,6 +52,8 @@ export const getAllItems: RequestHandler = async (req, res) => {
         (SELECT
           pastrie.name,
           pastrie.slug,
+          pastrie.section_name,
+          pastrie.section_slug,
           base_price AS price,
           CAST(base_price * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
           offer.discount
@@ -59,6 +65,8 @@ export const getAllItems: RequestHandler = async (req, res) => {
     `)) as {
       name: string;
       slug: string;
+      section_name: string;
+      section_slug: string;
       price: string;
       price_w_discount: string | null;
       discount: number | null;

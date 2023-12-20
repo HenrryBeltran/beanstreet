@@ -19,7 +19,7 @@ export default function NavDropdownMenu({ theme }: Props) {
     staleTime: Infinity,
   });
 
-  const handleMouseOver: MouseEventHandler = e => {
+  const handleMouseOver: MouseEventHandler = (e) => {
     const link = e.currentTarget.querySelector(".item");
     const mark = e.currentTarget.querySelector(".mark");
     timeline([
@@ -28,7 +28,7 @@ export default function NavDropdownMenu({ theme }: Props) {
     ]);
   };
 
-  const handleMouseLeave: MouseEventHandler = e => {
+  const handleMouseLeave: MouseEventHandler = (e) => {
     const link = e.currentTarget.querySelector(".item");
     const mark = e.currentTarget.querySelector(".mark");
     timeline([

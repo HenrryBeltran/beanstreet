@@ -23,7 +23,7 @@ export default async function CarouselContainer({ type }: { type: "drinks" | "fo
 
   return (
     <CarouselScroll itemLength={data.result.length ?? 0}>
-      {data.result.map(item => (
+      {data.result.map((item) => (
         <CarouselCard item={item} key={item.slug} />
       ))}
     </CarouselScroll>
