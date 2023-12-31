@@ -7,7 +7,7 @@ export default function CarouselCard({ item }: { item: Item }) {
     <li className="relative w-fit snap-start">
       <Link
         className="block w-full space-y-3 pb-3 tap-highlight-transparent"
-        href={`/shop/item/${item.slug}`}
+        href={`/shop/item/${item.type}/${item.slug}`}
       >
         <Image
           src={`${process.env.SITE_URL}/items/${item.slug}.jpg`}

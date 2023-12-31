@@ -14,6 +14,7 @@ export const getAllItems: RequestHandler = async (req, res) => {
           drink.slug,
           drink.section_name,
           drink.section_slug,
+          drink.type,
           CAST(base_price + size.extra_cost + COALESCE(milk.extra_cost, 0.00) AS numeric(100, 2)) AS price,
           CAST((base_price + size.extra_cost + COALESCE(milk.extra_cost, 0.00)) * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
           offer.discount
@@ -39,6 +40,7 @@ export const getAllItems: RequestHandler = async (req, res) => {
           sandwich.slug,
           sandwich.section_name,
           sandwich.section_slug,
+          sandwich.type,
           base_price AS price,
           CAST(base_price * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
           offer.discount
@@ -54,6 +56,7 @@ export const getAllItems: RequestHandler = async (req, res) => {
           pastrie.slug,
           pastrie.section_name,
           pastrie.section_slug,
+          pastrie.type,
           base_price AS price,
           CAST(base_price * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
           offer.discount
@@ -154,7 +157,8 @@ export const getItemsBySection: RequestHandler = async (req, res) => {
           CAST((base_price + size.extra_cost + COALESCE(milk.extra_cost, 0.00)) * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
           offer.discount,
           section_name,
-          section_slug
+          section_slug,
+          drink.type
         FROM drink
         LEFT JOIN offer
           ON offer.id = drink.offer_id
@@ -179,7 +183,8 @@ export const getItemsBySection: RequestHandler = async (req, res) => {
           CAST(base_price * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
           offer.discount,
           section_name,
-          section_slug
+          section_slug,
+          sandwich.type
         FROM sandwich
         LEFT JOIN offer
           ON offer.id = sandwich.offer_id
@@ -194,7 +199,8 @@ export const getItemsBySection: RequestHandler = async (req, res) => {
           CAST(base_price * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
           offer.discount,
           section_name,
-          section_slug
+          section_slug,
+          pastrie.type
         FROM pastrie
         LEFT JOIN offer
           ON offer.id = pastrie.offer_id
@@ -288,7 +294,8 @@ export const getSelectedDrinks: RequestHandler = async (_req, res) => {
         CAST((base_price + size.extra_cost + COALESCE(milk.extra_cost, 0.00)) * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
         offer.discount,
         section_name,
-        section_slug
+        section_slug,
+        drink.type
       FROM drink
       LEFT JOIN offer
         ON offer.id = drink.offer_id
@@ -318,7 +325,8 @@ export const getSelectedFood: RequestHandler = async (_req, res) => {
         price_w_discount,
         discount,
         section_name,
-        section_slug
+        section_slug,
+        type
       FROM ( 
         (SELECT
           sandwich.name, 
@@ -328,6 +336,7 @@ export const getSelectedFood: RequestHandler = async (_req, res) => {
           offer.discount,
           section_name,
           section_slug,
+          type,
           selected
         FROM sandwich
         LEFT JOIN offer
@@ -343,6 +352,7 @@ export const getSelectedFood: RequestHandler = async (_req, res) => {
           offer.discount,
           section_name,
           section_slug,
+          type,
           selected
         FROM pastrie
         LEFT JOIN offer
@@ -362,7 +372,7 @@ export const getDrinkBySlug: RequestHandler = async (req, res) => {
   const slug = req.params.slug;
 
   try {
-    const drink = await db.execute(sql`
+    const result = await db.execute(sql`
       SELECT
         drink.id,
         drink.name,
@@ -370,6 +380,7 @@ export const getDrinkBySlug: RequestHandler = async (req, res) => {
         drink.description,
         section_name,
         section_slug,
+        drink.type,
         drink.default_sweetener,
         drink.sweetener_teaspoon,
         milk.name AS default_milk,
@@ -390,7 +401,7 @@ export const getDrinkBySlug: RequestHandler = async (req, res) => {
       WHERE drink.slug = ${slug};
     `);
 
-    if (drink[0] === undefined) {
+    if (result[0] === undefined) {
       return res.status(500).json({ message: "Database Error: Failed to get drink" });
     }
 
@@ -403,7 +414,7 @@ export const getDrinkBySlug: RequestHandler = async (req, res) => {
       FROM milk_option
       LEFT JOIN milk
         ON milk.id = milk_option.milk_id
-      WHERE milk_option.drink_id = ${drink[0].id}
+      WHERE milk_option.drink_id = ${result[0].id}
       ORDER BY milk.order ASC NULLS FIRST;
     `);
 
@@ -417,11 +428,11 @@ export const getDrinkBySlug: RequestHandler = async (req, res) => {
       FROM size_option
       LEFT JOIN size
         ON size.id = size_option.size_id
-      WHERE size_option.drink_id = ${drink[0].id}
+      WHERE size_option.drink_id = ${result[0].id}
       ORDER BY size.order ASC;
     `);
 
-    return res.json({ drink, milkOptions, sizeOptions });
+    return res.json({ result, milkOptions, sizeOptions });
   } catch (error) {
     return res.status(500).json({ message: "Database Error: Failed to get item", error });
   }
@@ -431,7 +442,7 @@ export const getSandwichBySlug: RequestHandler = async (req, res) => {
   const slug = req.params.slug;
 
   try {
-    const sandwich = await db.execute(sql`
+    const result = await db.execute(sql`
       SELECT
         sandwich.id,
         sandwich.name,
@@ -439,6 +450,7 @@ export const getSandwichBySlug: RequestHandler = async (req, res) => {
         sandwich.description,
         section_name,
         section_slug,
+        sandwich.type,
         base_price,
         CAST(base_price * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
         offer.discount
@@ -448,7 +460,7 @@ export const getSandwichBySlug: RequestHandler = async (req, res) => {
       WHERE sandwich.slug = ${slug};
     `);
 
-    return res.json({ sandwich });
+    return res.json({ result });
   } catch (error) {
     return res.status(500).json({ message: "Database Error: Failed to get item", error });
   }
@@ -458,7 +470,7 @@ export const getPastrieBySlug: RequestHandler = async (req, res) => {
   const slug = req.params.slug;
 
   try {
-    const pastrie = await db.execute(sql`
+    const result = await db.execute(sql`
       SELECT
         pastrie.id,
         pastrie.name,
@@ -466,6 +478,7 @@ export const getPastrieBySlug: RequestHandler = async (req, res) => {
         pastrie.description,
         section_name,
         section_slug,
+        pastrie.type,
         base_price,
         CAST(base_price * (1.00 - (offer.discount * 0.01)) AS numeric(100, 2)) AS price_w_discount,
         offer.discount,
@@ -476,7 +489,7 @@ export const getPastrieBySlug: RequestHandler = async (req, res) => {
       WHERE pastrie.slug = ${slug};
     `);
 
-    return res.json({ pastrie });
+    return res.json({ result });
   } catch (error) {
     return res.status(500).json({ message: "Database Error: Failed to get item", error });
   }

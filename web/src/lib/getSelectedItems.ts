@@ -12,6 +12,7 @@ export type Item = {
   discount: number | null;
   section_name: string;
   section_slug: string;
+  type: string;
 };
 
 type GetHandler = (type: string) => Promise<SelectedCoffees | null>;

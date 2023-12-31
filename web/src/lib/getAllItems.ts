@@ -11,6 +11,7 @@ export type Item = {
   price: string;
   section_name: string;
   section_slug: string;
+  type: string;
   price_w_discount: string | null;
   discount: number | null;
 };

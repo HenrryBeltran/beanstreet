@@ -74,18 +74,13 @@ export default function SortButton({ isASection, initialSearch }: Props) {
       onChange={setSelectedOption}
     >
       <Listbox.Button className="flex select-none items-center gap-1 text-stone-800 outline-none">
-        {({ open }) => (
-          <>
-            <span className="font-medium leading-none md:text-lg">Sort by</span>
-            <ChevronUp
-              data-open={open}
-              absoluteStrokeWidth
-              strokeWidth={2}
-              className="scale-90 transition-transform duration-300 data-[open=true]:rotate-180 md:scale-100"
-              size={20}
-            />
-          </>
-        )}
+        <span className="font-medium leading-none md:text-lg">Sort by</span>
+        <ChevronUp
+          absoluteStrokeWidth
+          strokeWidth={2}
+          className="scale-90 transition-transform duration-300 ui-open:rotate-180 md:scale-100"
+          size={20}
+        />
       </Listbox.Button>
       <Listbox.Options
         as="ul"
@@ -96,7 +91,7 @@ export default function SortButton({ isASection, initialSearch }: Props) {
             {({ selected }) => (
               <button
                 data-selected={selected}
-                className="flex w-full items-center gap-1.5 px-4 py-1.5 hover:bg-stone-300/70 data-[selected=true]:bg-stone-300/70"
+                className="flex w-full items-center gap-1.5 px-4 py-1.5 hover:bg-stone-400/70 data-[selected=true]:bg-stone-500 data-[selected=true]:text-stone-50"
               >
                 <Check
                   aria-hidden={!selected}

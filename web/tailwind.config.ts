@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
+import headlessui from "@headlessui/tailwindcss";
 
 const config: Config = {
   content: [
@@ -24,6 +25,7 @@ const config: Config = {
     },
   },
   plugins: [
+    headlessui,
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".tap-highlight-transparent": {

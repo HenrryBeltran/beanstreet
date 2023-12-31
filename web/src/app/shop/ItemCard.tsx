@@ -1,5 +1,4 @@
 import { Item } from "@/lib/getAllItems";
-import { staticImages } from "@/utils/staticImages";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,15 +11,11 @@ export default function ItemCard({ item }: Props) {
     <li className="relative w-full">
       <Link
         className="group relative block w-full space-y-3 pb-3"
-        href={`/shop/item/${item.slug}`}
+        href={`/shop/item/${item.type}/${item.slug}`}
       >
         <div className="overflow-hidden">
           <Image
-            // src={`${process.env.SITE_URL}/items/${item.slug}.jpg`}
-            src={
-              staticImages.find((itemImage) => itemImage.value === item.slug)?.img ??
-              `${process.env.SITE_URL}/items/${item.slug}.jpg`
-            }
+            src={`${process.env.SITE_URL}/items/${item.slug}.jpg`}
             alt={item.name}
             quality={90}
             width={320}
@@ -38,15 +33,12 @@ export default function ItemCard({ item }: Props) {
         </p>
         <div className="flex items-baseline justify-between">
           <div className="space-x-[min(0.75rem,2.125vw)] font-medium">
-            {item.price_w_discount ? (
-              <span className="text-[min(1rem,4vw)] leading-none text-stone-500 line-through">
-                ${item.price}
-              </span>
-            ) : (
-              <span className="text-[min(1rem,4vw)] leading-none text-stone-700">
-                ${item.price}
-              </span>
-            )}
+            <span
+              data-discount={item.price_w_discount !== null}
+              className="text-[min(1rem,4vw)] leading-none data-[discount=false]:text-stone-700 data-[discount=true]:text-stone-500 data-[discount=true]:line-through"
+            >
+              ${item.price}
+            </span>
             {item.price_w_discount && (
               <span className="text-[min(1rem,4vw)] leading-none text-red-500">
                 ${item.price_w_discount}

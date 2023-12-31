@@ -11,6 +11,8 @@
 
   --global-viewport: 82.2222vw;
   --global-viewport-padding: calc(50vw - min(1680px, var(--global-viewport)) / 2);
+  --global-md-viewport: 64.42vw;
+  --global-md-viewport-padding: calc(50vw - min(1680px, var(--global-md-viewport)) / 2);
 }
 
 @layer base {
