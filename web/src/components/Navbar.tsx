@@ -4,13 +4,16 @@ import { twMerge } from "tailwind-merge";
 import MenuButton from "./client/MenuButton";
 import NavLinkMarker from "./client/NavLink";
 import Profile from "./client/Profile";
+import { getSession } from "@/lib/getSession";
 
 type Props = {
   theme?: "dark" | "light";
   crystal?: boolean;
 };
 
-export default function Navbar({ theme = "dark", crystal = false }: Props) {
+export default async function Navbar({ theme = "dark", crystal = false }: Props) {
+  const session = await getSession();
+
   return (
     <nav
       data-theme={theme}
@@ -45,7 +48,7 @@ export default function Navbar({ theme = "dark", crystal = false }: Props) {
           <NavLink name="About Us" slug="about-us" />
         </ul>
         <div className="flex items-center gap-6 md:gap-8">
-          <Profile theme={theme} />
+          <Profile theme={theme} session={session} />
           <Link href="/cart" className="group relative tap-highlight-transparent">
             <ShoppingBag
               className="transition-[stroke-width] duration-200 group-hover:stroke-2"
@@ -65,7 +68,7 @@ export default function Navbar({ theme = "dark", crystal = false }: Props) {
               </span>
             </div>
           </Link>
-          <MenuButton theme={theme} />
+          <MenuButton theme={theme} session={session} />
         </div>
       </div>
     </nav>

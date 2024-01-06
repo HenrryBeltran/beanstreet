@@ -1,29 +1,17 @@
-"use client";
-
-import { getSession } from "@/lib/getSession";
-import { useQuery } from "@tanstack/react-query";
+import { SessionResult } from "@/lib/getSession";
 import Link from "next/link";
 import ProfileDropdown from "./ProfileDropdown";
 
 type Props = {
   theme: "dark" | "light";
+  session: SessionResult | null;
 };
 
-export default function Profile({ theme }: Props) {
-  const { data, isLoading } = useQuery({
-    queryFn: getSession,
-    queryKey: ["session"],
-    staleTime: Infinity,
-  });
-
-  if (isLoading) {
-    return;
-  }
-
+export default async function Profile({ theme, session }: Props) {
   return (
     <>
-      {data ? (
-        <ProfileDropdown theme={theme} username={data.user?.name} />
+      {session ? (
+        <ProfileDropdown theme={theme} username={session.user?.name} />
       ) : (
         <>
           <div className="flex gap-6">

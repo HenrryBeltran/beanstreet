@@ -1,7 +1,6 @@
 "use client";
 
-import { getSession } from "@/lib/getSession";
-import { useQuery } from "@tanstack/react-query";
+import { SessionResult } from "@/lib/getSession";
 import { timeline } from "motion";
 import Link from "next/link";
 import { MouseEventHandler, ReactNode } from "react";
@@ -10,15 +9,10 @@ import { twMerge } from "tailwind-merge";
 type Props = {
   theme: "dark" | "light";
   isOpen?: boolean; // Check if this is going to stay here
+  session: SessionResult | null;
 };
 
-export default function NavDropdownMenu({ theme }: Props) {
-  const { data } = useQuery({
-    queryFn: getSession,
-    queryKey: ["session"],
-    staleTime: Infinity,
-  });
-
+export default function NavDropdownMenu({ theme, session }: Props) {
   const handleMouseOver: MouseEventHandler = (e) => {
     const link = e.currentTarget.querySelector(".item");
     const mark = e.currentTarget.querySelector(".mark");
@@ -83,7 +77,7 @@ export default function NavDropdownMenu({ theme }: Props) {
         >
           About Us
         </MenuLink>
-        {!data && (
+        {!session && (
           <>
             <MenuLink
               className="drop-down-li"

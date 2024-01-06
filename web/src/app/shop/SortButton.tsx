@@ -84,15 +84,16 @@ export default function SortButton({ isASection, initialSearch }: Props) {
       </Listbox.Button>
       <Listbox.Options
         as="ul"
-        className="absolute right-0 top-full mt-2 w-fit animate-[appear_0.24s_cubic-bezier(0.22,0.61,0.36,1)] whitespace-nowrap rounded-md bg-stone-200/60 py-2 text-sm text-stone-800 shadow-lg shadow-stone-700/30 outline-none backdrop-blur-lg md:text-base"
+        className="absolute right-0 top-full mt-2 w-fit animate-[appear_0.24s_cubic-bezier(0.22,0.61,0.36,1)] whitespace-nowrap rounded-md border border-stone-300/80 bg-stone-50 py-3 text-sm text-stone-700 shadow-lg shadow-stone-600/30 outline-none md:text-base"
       >
         {listSorOptions.map((option) => (
           <Listbox.Option key={option.id} value={option} as="li">
             {({ selected }) => (
               <button
                 data-selected={selected}
-                className="flex w-full items-center gap-1.5 px-4 py-1.5 hover:bg-stone-400/70 data-[selected=true]:bg-stone-500 data-[selected=true]:text-stone-50"
+                className="flex w-72 items-center justify-between px-4 py-1.5 hover:bg-stone-300/70 hover:text-stone-800 ui-selected:bg-stone-300/70 ui-selected:text-stone-800"
               >
+                <span>{option.name}</span>
                 <Check
                   aria-hidden={!selected}
                   className="aria-hidden:invisible"
@@ -100,7 +101,6 @@ export default function SortButton({ isASection, initialSearch }: Props) {
                   strokeWidth={1.5}
                   size={20}
                 />
-                <span>{option.name}</span>
               </button>
             )}
           </Listbox.Option>

@@ -187,7 +187,7 @@ export const getSession: RequestHandler = async (req, res) => {
   let foundUser: SelectUser;
   try {
     const { foundUserSession, message, status, error } = await authentication(
-      req.cookies,
+      req.body.cookies,
     );
 
     if (!foundUserSession) {

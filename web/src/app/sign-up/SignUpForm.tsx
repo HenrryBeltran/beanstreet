@@ -75,6 +75,7 @@ export default function SignUpForm() {
     }
 
     router.replace("/shop");
+    router.refresh();
   };
 
   return (

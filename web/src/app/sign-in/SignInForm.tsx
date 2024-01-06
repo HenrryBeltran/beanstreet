@@ -2,11 +2,11 @@
 
 import { formSchema } from "@/utils/schemas";
 import { Try } from "@/utils/try";
+import { Popover, Transition } from "@headlessui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
 import { ChevronRight, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -17,7 +17,6 @@ export default function SignInForm() {
   const [revealPassword, setRevealPassword] = useState(false);
   const submitBtnRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
-  const queryClient = useQueryClient();
 
   const {
     register,
@@ -63,9 +62,8 @@ export default function SignInForm() {
       return;
     }
 
-    queryClient.invalidateQueries({ queryKey: ["session"] });
-
     router.replace("/shop");
+    router.refresh();
   };
 
   const setUserHandler = ({ email, password }: { email: string; password: string }) => {
@@ -76,33 +74,41 @@ export default function SignInForm() {
 
   return (
     <>
-      <div className="relative mb-12 flex w-fit whitespace-nowrap text-sm leading-none text-stone-500">
+      <Popover className="relative mb-12 flex w-fit whitespace-nowrap text-sm leading-none text-stone-500">
         <p className="peer">
           Use an example{" "}
-          <span className="group peer cursor-pointer select-none text-stone-700 tap-highlight-transparent">
+          <Popover.Button className="group peer cursor-pointer select-none text-stone-700 outline-none tap-highlight-transparent">
             account
             <ChevronRight
-              className="inline-block transition-transform group-hover:rotate-90"
+              className="inline-block transition-transform ui-open:rotate-90"
               absoluteStrokeWidth
               strokeWidth={1.5}
               size={16}
             />
-          </span>
+          </Popover.Button>
         </p>
-        <ul className="invisible absolute left-1/2 top-full block -translate-x-1/2 space-y-4 rounded-md bg-stone-50 p-4 pt-6 text-start opacity-0 shadow-2xl transition-opacity duration-300 ease-in hover:visible hover:opacity-100 peer-hover:visible peer-hover:opacity-100">
-          <li className="space-y-3">
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-200"
+          enterFrom="opacity-0 translate-y-1"
+          enterTo="opacity-100 translate-y-0"
+          leave="transition ease-in duration-150"
+          leaveFrom="opacity-100 translate-y-0"
+          leaveTo="opacity-0 translate-y-1"
+        >
+          <Popover.Panel className="absolute left-1/2 top-full mt-2 block -translate-x-1/2 space-y-4 rounded-md border border-stone-200 bg-stone-50 p-5 text-start shadow-2xl">
             <p className="text-stone-700">Use an user account</p>
             <button
-              className="rounded-full bg-stone-800 px-3 py-1.5 leading-none text-stone-50 transition-colors hover:bg-stone-700"
+              className="w-full rounded-full bg-stone-800 px-3.5 py-1.5 leading-none text-stone-50 transition-colors hover:bg-stone-700"
               onClick={() =>
                 setUserHandler({ email: "user@example.com", password: "coffee123" })
               }
             >
-              User
+              Generate
             </button>
-          </li>
-        </ul>
-      </div>
+          </Popover.Panel>
+        </Transition>
+      </Popover>
       <form
         className="flex w-full max-w-md flex-col items-start"
         onSubmit={handleSubmit(onSubmit)}

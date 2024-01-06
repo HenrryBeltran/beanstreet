@@ -3,6 +3,7 @@
 import { TimelineDefinition, stagger, timeline } from "motion";
 import { useRef, useState } from "react";
 import DropdownMenu from "./NavDropdownMenu";
+import { SessionResult } from "@/lib/getSession";
 
 const openSequence: TimelineDefinition = [
   ["#drop-down", { visibility: "visible" }, { duration: 0 }],
@@ -30,9 +31,10 @@ const closeSequence: TimelineDefinition = [
 
 type Props = {
   theme: "dark" | "light";
+  session: SessionResult | null;
 };
 
-export default function MenuButton({ theme }: Props) {
+export default function MenuButton({ theme, session }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const breadTopOpen = useRef<SVGAnimateElement>(null);
   const breadTopClose = useRef<SVGAnimateElement>(null);
@@ -65,7 +67,7 @@ export default function MenuButton({ theme }: Props) {
 
   return (
     <div className="relative h-6 w-6 md:hidden">
-      <DropdownMenu theme={theme} isOpen={isOpen} />
+      <DropdownMenu theme={theme} isOpen={isOpen} session={session} />
       <button
         className="relative z-50 tap-highlight-transparent"
         onClick={handleOnClick}

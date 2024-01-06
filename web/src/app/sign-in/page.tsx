@@ -1,8 +1,16 @@
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import SignInForm from "./SignInForm";
+import { getSession } from "@/lib/getSession";
+import { redirect } from "next/navigation";
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const session = await getSession();
+
+  if (session) {
+    redirect("/shop");
+  }
+
   return (
     <main>
       <Navbar theme="light" />

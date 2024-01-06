@@ -1,17 +1,26 @@
 import { Try } from "@/utils/try";
+import { cookies } from "next/headers";
 
-type Result = {
+export type SessionResult = {
   user?: { name: string };
   message: string;
 };
 
-type GetHandler = () => Promise<Result | null>;
+type GetHandler = () => Promise<SessionResult | null>;
 
 export const getSession: GetHandler = async () => {
+  const cookieStore = cookies();
+  const sid = cookieStore.get("sid");
+
   const { error: responseError, result: response } = await Try(
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/session`, {
-      method: "GET",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cookies: { sid: sid?.value } }),
       credentials: "include",
+      next: { tags: ["session"] },
     }),
   );
 
@@ -20,14 +29,14 @@ export const getSession: GetHandler = async () => {
     return null;
   }
 
-  const { error: parseError, result } = await Try<Result>(response.json());
-
-  if (parseError) {
-    console.error(`Server Error: Failed to parse get session response. ${parseError}`);
+  if (!response.ok) {
     return null;
   }
 
-  if (!response.ok) {
+  const { error: parseError, result } = await Try<SessionResult>(response.json());
+
+  if (parseError) {
+    console.error(`Server Error: Failed to parse get session response. ${parseError}`);
     return null;
   }
 
