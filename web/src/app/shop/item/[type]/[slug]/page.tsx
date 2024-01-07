@@ -16,6 +16,7 @@ import DrinkEditor from "./DrinkEditor";
 import SandwichEditor from "./SandwichEditor";
 import PastrieEditor from "./PastrieEditor";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export const dynamicParams = false;
 
@@ -38,6 +39,19 @@ type Props = {
 };
 
 export default async function ItemPage({ params }: Props) {
+  return (
+    <main>
+      <Navbar theme="light" />
+      <Banner theme="light" />
+      <Suspense fallback={<ItemContainerSkeleton />}>
+        <ItemContainer params={params} />
+      </Suspense>
+      <Footer />
+    </main>
+  );
+}
+
+async function ItemContainer({ params }: Props) {
   let data: Drink | Sandwich | Pastrie | null;
   let editor: React.ReactElement;
 
@@ -63,9 +77,7 @@ export default async function ItemPage({ params }: Props) {
   }
 
   return (
-    <main>
-      <Navbar theme="light" />
-      <Banner theme="light" />
+    <>
       <div className="px-6 py-8 lg:mx-[var(--global-viewport-padding)] lg:px-0">
         <ul className="flex gap-1 text-sm leading-none text-stone-500 lg:text-base">
           <li>
@@ -100,7 +112,29 @@ export default async function ItemPage({ params }: Props) {
         />
         {editor}
       </div>
-      <Footer />
-    </main>
+    </>
+  );
+}
+
+function ItemContainerSkeleton() {
+  return (
+    <>
+      <div className="px-6 py-8 lg:mx-[var(--global-viewport-padding)] lg:px-0">
+        <div className="h-3.5 w-72 animate-pulse rounded-md bg-stone-200/70 lg:h-4" />
+      </div>
+      <div className="grid grid-flow-row grid-cols-1 gap-12 px-6 pb-16 pt-8 sm:mx-[var(--global-md-viewport-padding)] sm:px-0 lg:grid-cols-2 lg:grid-rows-1 lg:gap-16 lg:pb-32 xl:gap-32">
+        <div className="">
+          <div className="h-5 w-64 animate-pulse rounded-md bg-stone-200/70" />
+          <div className="space-y-0.5">
+            <div className="h-4 w-full animate-pulse rounded-md bg-stone-200/70" />
+            <div className="h-4 w-full animate-pulse rounded-md bg-stone-200/70" />
+            <div className="h-4 w-3/4 animate-pulse rounded-md bg-stone-200/70" />
+          </div>
+          <div className="aspect-square w-full animate-pulse rounded-md bg-stone-200/70" />
+        </div>
+        <div className="h-3.5 w-72 animate-pulse rounded-md bg-stone-200/70 lg:h-4" />
+        <div className="h-3.5 w-72 animate-pulse rounded-md bg-stone-200/70 lg:h-4" />
+      </div>
+    </>
   );
 }

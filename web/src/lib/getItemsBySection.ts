@@ -23,8 +23,7 @@ export const getItemsBySection: GetHandler<Items> = async (section, searchParams
 
   const { error: fetchError, result: response } = await Try(
     fetch(`${process.env.API_URL}/item/section/${section}${search}`, {
-      cache: "no-store",
-      next: { tags: ["items"] },
+      next: { tags: ["items"], revalidate: 3600 },
     }),
   );
 
@@ -49,8 +48,7 @@ export const getItemsBySection: GetHandler<Items> = async (section, searchParams
 export const getItemsCountBySection: GetHandler<{ count: string }> = async (section) => {
   const { error: fetchError, result: response } = await Try(
     fetch(`${process.env.API_URL}/item/section/count/${section}`, {
-      cache: "no-store",
-      next: { tags: ["items", "count"] },
+      next: { tags: ["items", "count"], revalidate: 900 },
     }),
   );
 

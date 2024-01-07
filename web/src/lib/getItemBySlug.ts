@@ -72,8 +72,7 @@ export const getDrinkBySlug: GetHandler<Drink> = async (type, slug) => {
 
   const { error: fetchError, result: response } = await Try(
     fetch(url, {
-      cache: "no-store",
-      next: { tags: [type, slug] },
+      next: { tags: [type, slug], revalidate: 900 },
     }),
   );
 
@@ -97,8 +96,7 @@ export const getSandwichBySlug: GetHandler<Sandwich> = async (type, slug) => {
 
   const { error: fetchError, result: response } = await Try(
     fetch(url, {
-      cache: "no-store",
-      next: { tags: [type, slug] },
+      next: { tags: [type, slug], revalidate: 900 },
     }),
   );
 
@@ -122,8 +120,7 @@ export const getPastrieBySlug: GetHandler<Pastrie> = async (type, slug) => {
 
   const { error: fetchError, result: response } = await Try(
     fetch(url, {
-      cache: "no-store",
-      next: { tags: [type, slug] },
+      next: { tags: [type, slug], revalidate: 900 },
     }),
   );
 
