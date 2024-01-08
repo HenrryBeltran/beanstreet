@@ -102,17 +102,19 @@ export function SidenavMobile({ section }: { section?: string }) {
         <NavigationLinks href="/shop/pastries" section={section} sectionLink="pastries">
           Pastries
         </NavigationLinks>
-        <li className="relative leading-none">
-          <Link
-            href="/shop"
-            className="peer inline-block font-medium text-red-500 transition-all ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:font-bold"
-          >
-            Clear filters
-          </Link>
-          <span className="pointer-events-none invisible absolute -left-[1.125rem] top-1/2 block h-fit w-fit -translate-y-1/2 translate-x-full text-red-500 opacity-0 transition-all delay-75 duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] peer-hover:visible peer-hover:translate-x-0 peer-hover:opacity-100">
-            <X absoluteStrokeWidth strokeWidth={2} size={16} />
-          </span>
-        </li>
+        {section && (
+          <li className="relative leading-none">
+            <Link
+              href="/shop"
+              className="peer inline-block font-medium text-red-500 transition-all ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:font-bold"
+            >
+              Clear filters
+            </Link>
+            <span className="pointer-events-none invisible absolute -left-[1.125rem] top-1/2 block h-fit w-fit -translate-y-1/2 translate-x-full text-red-500 opacity-0 transition-all delay-75 duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] peer-hover:visible peer-hover:translate-x-0 peer-hover:opacity-100">
+              <X absoluteStrokeWidth strokeWidth={2} size={16} />
+            </span>
+          </li>
+        )}
       </ul>
     </aside>
   );

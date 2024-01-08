@@ -23,7 +23,8 @@ export const getAllItems: GetHandler<Items> = async (searchParams) => {
 
   const { error: fetchError, result: response } = await Try(
     fetch(`${process.env.API_URL}/item${search}`, {
-      next: { tags: ["items"], revalidate: 900 },
+      cache: "no-store",
+      next: { tags: ["items"] },
     }),
   );
 

@@ -1,3 +1,5 @@
+import million from "million/compiler";
+
 const protocol = process.env.RP_PROTOCOL ?? "";
 const hostname = process.env.RP_HOSTNAME ?? "";
 const port = process.env.RP_PORT ?? "";
@@ -15,6 +17,11 @@ const nextConfig = {
       },
     ],
   },
+  reactStrictMode: true,
 };
 
-export default nextConfig;
+const millionConfig = {
+  auto: { rsc: true }, // if you're using RSC: auto: { rsc: true },
+};
+
+export default million.next(nextConfig, millionConfig);

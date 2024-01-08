@@ -5,7 +5,7 @@ import { clamp } from "@/utils/functions";
 import { Listbox, Transition } from "@headlessui/react";
 import { ChevronUp, Minus, Plus } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 export default function DrinkEditor({
   result: [drink],
@@ -29,7 +29,8 @@ export default function DrinkEditor({
     clamp(Number(searchParams.get("tsp")), 1, 4) ?? drink.sweetener_teaspoon;
   const milk = searchParams.get("m") ?? drink.default_milk;
   const size = searchParams.get("s") ?? drink.default_size;
-  const quantity = clamp(Number(searchParams.get("q")), 1, Infinity) ?? 1;
+
+  const [quantity, setQuantity] = useState(1);
 
   const currentSizeOption = sizeOptions.find((value) => value.name === size);
   const currentMilk = milkOptions.find((value) => value.name === milk);
@@ -42,8 +43,6 @@ export default function DrinkEditor({
     (Number(currentPrice) * (100 - (drink.discount ?? 100))) /
     100
   ).toFixed(2);
-  const totalPrice = (Number(currentPrice) * quantity).toFixed(2);
-  const totalPriceWithDiscount = (Number(currentPriceWithDiscount) * quantity).toFixed(2);
 
   function handleSweetener(value: string) {
     if (value === "None") {
@@ -57,17 +56,12 @@ export default function DrinkEditor({
     router.push(`?${params.toString()}`, { scroll: false });
   }
 
-  function handleCounter(
-    searchKey: string,
-    count: number,
-    amount: number,
-    condition: boolean = true,
-  ) {
+  function handleCounter(amount: number, condition: boolean = true) {
     if (!condition) return;
 
-    const newCount = count + amount;
+    const acc = teaspoons + amount;
 
-    params.set(searchKey, newCount.toString());
+    params.set("tsp", acc.toString());
     router.push(`?${params.toString()}`, { scroll: false });
   }
 
@@ -89,10 +83,12 @@ export default function DrinkEditor({
             data-discount={drink.price_w_discount !== null}
             className="font-ligh data-[discount=false]:text-stone-800 data-[discount=true]:text-stone-500 data-[discount=true]:line-through"
           >
-            ${totalPrice}
+            ${currentPrice}
           </span>
           {drink.price_w_discount && (
-            <span className="font-medium text-stone-800">${totalPriceWithDiscount}</span>
+            <span className="font-medium text-stone-800">
+              ${currentPriceWithDiscount}
+            </span>
           )}
         </div>
         <span className="rounded-full bg-orange-100 px-4 py-2 font-medium leading-none text-orange-600">
@@ -154,7 +150,7 @@ export default function DrinkEditor({
                 <button
                   disabled={teaspoons === 1}
                   className="rounded bg-stone-800 text-stone-50 transition-colors hover:bg-stone-700 disabled:bg-transparent disabled:text-stone-500 disabled:outline disabled:outline-[1.5px] disabled:outline-stone-500"
-                  onClick={() => handleCounter("tsp", teaspoons, -1, teaspoons !== 1)}
+                  onClick={() => handleCounter(-1, teaspoons !== 1)}
                   type="button"
                 >
                   <Minus absoluteStrokeWidth strokeWidth={1.5} size={16} />
@@ -162,7 +158,7 @@ export default function DrinkEditor({
                 <span className="text-stone-700">{teaspoons}</span>
                 <button
                   disabled={teaspoons === 4}
-                  onClick={() => handleCounter("tsp", teaspoons, +1, teaspoons !== 4)}
+                  onClick={() => handleCounter(+1, teaspoons !== 4)}
                   className="rounded bg-stone-800 text-stone-50 transition-colors hover:bg-stone-700 disabled:bg-transparent disabled:text-stone-500 disabled:outline disabled:outline-[1.5px] disabled:outline-stone-500"
                   type="button"
                 >
@@ -301,14 +297,14 @@ export default function DrinkEditor({
             <button
               disabled={quantity === 1}
               className="rounded bg-stone-800 text-stone-50 transition-colors hover:bg-stone-700 disabled:bg-transparent disabled:text-stone-500 disabled:outline disabled:outline-[1.5px] disabled:outline-stone-500"
-              onClick={() => handleCounter("q", quantity, -1, quantity !== 1)}
+              onClick={() => setQuantity((prev) => prev - 1)}
               type="button"
             >
               <Minus absoluteStrokeWidth strokeWidth={1.5} size={16} />
             </button>
             <span className="text-stone-700">{quantity}</span>
             <button
-              onClick={() => handleCounter("q", quantity, +1)}
+              onClick={() => setQuantity((prev) => prev + 1)}
               className="rounded bg-stone-800 text-stone-50 transition-colors hover:bg-stone-700"
               type="button"
             >

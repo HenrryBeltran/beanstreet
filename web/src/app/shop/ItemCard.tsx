@@ -25,13 +25,13 @@ export default function ItemCard({ item }: Props) {
             className="hover aspect-square w-full bg-stone-300 object-cover object-center transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-105"
           />
         </div>
-        <h4 className="font-serif text-[min(1.25rem,4vw)] font-bold leading-tight text-stone-800">
+        <h4 className="px-2 font-serif text-[min(1.25rem,4vw)] font-bold leading-tight text-stone-800 md:px-0">
           {item.name}
         </h4>
-        <p className="text-[min(0.875rem,3.25vw)] leading-none text-stone-500">
+        <p className="px-2 text-[min(0.875rem,3.25vw)] leading-none text-stone-500 md:px-0">
           {item.section_name}
         </p>
-        <div className="flex items-baseline justify-between">
+        <div className="flex items-baseline justify-between px-2 md:px-0">
           <div className="space-x-[min(0.75rem,2.125vw)] font-medium">
             <span
               data-discount={item.price_w_discount !== null}
