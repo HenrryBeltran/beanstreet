@@ -22,6 +22,7 @@ export default function MapContainer() {
         <Image
           src={sanFrancisco}
           quality={85}
+          placeholder="blur"
           sizes="(min-width: 1024px) 50vw, 100vw"
           className="aspect-square justify-self-start object-cover"
           alt="San Francisco Image Cover"
@@ -29,6 +30,7 @@ export default function MapContainer() {
         <Image
           src={newYork}
           quality={85}
+          placeholder="blur"
           sizes="(min-width: 1024px) 50vw, 100vw"
           className="aspect-square justify-self-end object-cover"
           alt="San Francisco Image Cover"

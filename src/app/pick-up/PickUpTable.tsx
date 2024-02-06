@@ -59,7 +59,7 @@ export default function PickUpTable() {
       <div className="flex-grow">
         <ul className="divide-y divide-stone-300">
           {orders &&
-            orders.map((order) => (
+            orders.map((order, index) => (
               <Disclosure key={order.ticket.toString()}>
                 <Disclosure.Button className="mb-2 flex w-full items-center justify-between rounded-md p-2 text-left hover:bg-stone-200/50 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                   <div className="space-x-8">
@@ -74,10 +74,23 @@ export default function PickUpTable() {
                     </span>
                     <span className="text-sm text-stone-600">
                       {format(
-                        addHours(new Date(order.createdAt), -5),
+                        addHours(
+                          new Date(order.createdAt),
+                          process.env.NODE_ENV === "production" ? 0 : -5,
+                        ),
                         "dd/MM/yyyy - HH:mm",
                       )}
                     </span>
+                    {index === 0 && (
+                      <span className="rounded-full bg-teal-200 px-3 py-1 text-sm font-medium leading-none text-teal-900">
+                        Ready
+                      </span>
+                    )}
+                    {index > 0 && (
+                      <span className="rounded-full bg-stone-200 px-3 py-1 text-sm font-medium leading-none text-stone-900">
+                        Picked up
+                      </span>
+                    )}
                   </div>
                   <div className="flex items-center gap-8">
                     <span className="space-x-4 font-medium text-stone-800">

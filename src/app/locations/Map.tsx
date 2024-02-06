@@ -16,7 +16,7 @@ export default function Map({ center }: Props) {
 
   return (
     <MapContainer
-      className="block h-1/2 w-full"
+      className="block h-2/5 w-full"
       center={center as LatLngExpression}
       zoom={15}
     >

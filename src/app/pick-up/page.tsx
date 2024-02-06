@@ -16,9 +16,12 @@ export default async function TakeOutPage() {
     <main>
       <Navbar theme="light" />
       <Banner theme="light" />
-      <h1 className="mx-6 my-8 font-serif text-3xl font-bold tracking-tight text-stone-800 lg:mx-[var(--global-viewport-padding)] lg:text-4xl">
-        Pick Up
-      </h1>
+      <header className="mx-6 my-8 lg:mx-[var(--global-viewport-padding)]">
+        <h1 className="font-serif text-3xl font-bold tracking-tight text-stone-800  lg:text-4xl">
+          Pick Up
+        </h1>
+        <p className="mt-2 text-stone-600">Your order is ready to pick up.</p>
+      </header>
       <PickUpTable />
       <Footer />
     </main>
