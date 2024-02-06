@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  font-family: var(--font-poppins);
+
+  --global-viewport: 82.2222vw;
+  --global-viewport-padding: calc(50vw - min(1680px, var(--global-viewport)) / 2);
+  --global-md-viewport: 64.42vw;
+  --global-md-viewport-padding: calc(50vw - min(1680px, var(--global-md-viewport)) / 2);
+}
+
+@layer base {
+  a,
+  button,
+  input {
+    @apply tap-highlight-transparent;
+  }
+}
+
+@layer utilities {
+  @keyframes falling {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
