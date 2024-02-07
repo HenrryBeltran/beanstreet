@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 
 type Props = {
   href: string;
@@ -7,6 +8,7 @@ type Props = {
   dark?: boolean;
   size?: "sm" | "base" | "lg";
   ariaLabel?: string;
+  className?: string;
 };
 
 export default function LinkButton(props: Props) {
@@ -16,7 +18,10 @@ export default function LinkButton(props: Props) {
       data-dark-theme={props.dark ?? false}
       data-size={props.size ?? "base"}
       aria-label={props.ariaLabel}
-      className="flex w-fit items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-stone-100 text-stone-800 data-[dark-theme=true]:bg-stone-800 data-[size=base]:px-5 data-[size=base]:py-2 data-[size=lg]:px-5 data-[size=lg]:py-2 data-[size=sm]:px-4 data-[size=sm]:py-1.5 data-[dark-theme=true]:text-stone-100 md:data-[size=lg]:gap-2.5 md:data-[size=lg]:px-6 md:data-[size=lg]:py-3"
+      className={twMerge(
+        "flex w-fit items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-stone-100 text-stone-800 data-[dark-theme=true]:bg-stone-800 data-[size=base]:px-5 data-[size=base]:py-2 data-[size=lg]:px-5 data-[size=lg]:py-2 data-[size=sm]:px-4 data-[size=sm]:py-1.5 data-[dark-theme=true]:text-stone-100 md:data-[size=lg]:gap-2.5 md:data-[size=lg]:px-6 md:data-[size=lg]:py-3",
+        props.className,
+      )}
     >
       <span
         data-size={props.size ?? "base"}

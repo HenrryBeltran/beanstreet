@@ -21,7 +21,7 @@ export default function MapContainer() {
         </div>
         <Image
           src={sanFrancisco}
-          quality={85}
+          quality={80}
           placeholder="blur"
           sizes="(min-width: 1024px) 50vw, 100vw"
           className="aspect-square justify-self-start object-cover"
@@ -34,6 +34,7 @@ export default function MapContainer() {
           sizes="(min-width: 1024px) 50vw, 100vw"
           className="aspect-square justify-self-end object-cover"
           alt="San Francisco Image Cover"
+          loading="lazy"
         />
         <div className="row-start-3 aspect-square max-h-fit w-full max-w-[1200px] justify-self-start p-6 lg:row-start-auto lg:w-[50vw] lg:p-16">
           <h2 className="font-serif text-5xl font-bold text-red-500 lg:text-[5.2vw] lg:leading-none">
