@@ -180,9 +180,6 @@ export default function SignUpForm() {
         <p className="mt-2 text-start text-sm text-stone-500">
           * Password must be 8 - 20 characters length.
         </p>
-        <p className="text-start text-sm leading-none text-stone-500">
-          * Password have to contain a number.
-        </p>
       </div>
       <button
         disabled={isSubmitting}
