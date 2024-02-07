@@ -5,7 +5,7 @@ export default function PrivacyPolicyPage() {
   return (
     <main className="relative">
       <Navbar theme="light" />
-      <section className="w-full px-6 pb-32 pt-16 lg:px-[var(--global-viewport-padding)]">
+      <section className="w-full px-6 pb-32 pt-16 lg:px-[calc(var(--global-viewport-padding)*2)]">
         <h1 className="text-xl font-light text-stone-600 lg:text-2xl">Privacy Policy</h1>
         <h2 className="mt-3 font-serif text-5xl font-bold text-stone-800 lg:text-6xl">
           Bean Street
