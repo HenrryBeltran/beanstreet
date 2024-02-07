@@ -55,7 +55,7 @@ export async function PATCH(req: Request) {
     if (emailError) {
       return Response.json(
         {
-          message: "Validation Error: Failed to process password",
+          message: "Database Error: Error trying to find user with email.",
           error: emailError,
         },
         { status: 500 },
@@ -105,13 +105,13 @@ export async function PATCH(req: Request) {
   );
 
   if (error) {
-    Response.json(
+    return Response.json(
       { message: "Database Error: Failed to update user", error },
       { status: 500 },
     );
   }
 
-  Response.json({ message: "User successfully updated" });
+  return Response.json({ message: "User successfully updated" });
 }
 
 // Delete an account
