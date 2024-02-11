@@ -62,15 +62,19 @@ export default function PickUpTable() {
             orders.map((order, index) => (
               <Disclosure key={order.ticket.toString()}>
                 <Disclosure.Button className="mb-2 flex w-full items-center justify-between rounded-md p-2 text-left hover:bg-stone-200/50 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
-                  <div className="space-x-8">
+                  <div className="flex flex-col justify-start gap-1 lg:block lg:gap-0 lg:space-x-8">
                     <span className="font-medium text-stone-800">
                       #{order.ticket.padStart(6, "0")}
                     </span>
-                    <span className="inline-block w-24 text-right text-sm text-stone-600">
+                    <span className="inline-block w-24 text-left text-sm text-stone-600 lg:text-right">
                       {order.items
                         .map((item) => item.quantity)
                         .reduce((acc, current) => acc + current)}{" "}
-                      Items
+                      {order.items
+                        .map((item) => item.quantity)
+                        .reduce((acc, current) => acc + current) > 1
+                        ? "Items"
+                        : "Item"}
                     </span>
                     <span className="text-sm text-stone-600">
                       {format(
@@ -92,10 +96,10 @@ export default function PickUpTable() {
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-8">
-                    <span className="space-x-4 font-medium text-stone-800">
+                  <div className="flex items-center gap-2 lg:gap-8">
+                    <span className="flex flex-col font-medium text-stone-800 lg:inline lg:space-x-4">
                       <span>Total</span>
-                      <span className="inline-block w-24 text-right font-bold">
+                      <span className="inline-block w-14 text-left font-bold lg:w-24 lg:text-right">
                         ${order.grandTotalPrice}
                       </span>
                     </span>
