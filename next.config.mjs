@@ -1,3 +1,5 @@
+import withPlaiceholder from "@plaiceholder/next";
+
 const protocol = process.env.RP_PROTOCOL ?? "";
 const hostname = process.env.RP_HOSTNAME ?? "";
 const port = process.env.RP_PORT ?? "";
@@ -17,4 +19,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPlaiceholder(nextConfig);

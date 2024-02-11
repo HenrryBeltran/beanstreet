@@ -1,16 +1,16 @@
 import { Item } from "@/lib/getAllItems";
-import { getBase64 } from "@/utils/getBase64";
 import Image from "next/image";
 import Link from "next/link";
+import fs from "node:fs/promises";
+import { getPlaiceholder } from "plaiceholder";
 
 type Props = {
   item: Item;
 };
 
 export default async function ItemCard({ item }: Props) {
-  const blurDataURL = await getBase64(
-    `${process.env.SITE_URL}/items/${item.slug}-blur.jpg`,
-  );
+  const buffer = await fs.readFile(`./public/items/${item.slug}.jpg`);
+  const { base64 } = await getPlaiceholder(buffer, { size: 4 });
 
   return (
     <li className="relative w-full">
@@ -20,15 +20,15 @@ export default async function ItemCard({ item }: Props) {
       >
         <div className="overflow-hidden">
           <Image
-            src={`${process.env.SITE_URL}/items/${item.slug}.jpg`}
+            src={`${process.env.NEXT_PUBLIC_SITE_URL}/items/${item.slug}.jpg`}
             alt={item.name}
             quality={90}
             width={320}
             height={320}
             placeholder="blur"
-            blurDataURL={blurDataURL}
-            sizes="(min-width: 768px) 33vw, 50vw"
+            blurDataURL={base64}
             loading="lazy"
+            sizes="(min-width: 768px) 33vw, 50vw"
             className="hover aspect-square w-full bg-stone-300 object-cover object-center transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-105"
           />
         </div>

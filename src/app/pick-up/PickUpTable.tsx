@@ -118,9 +118,9 @@ export default function PickUpTable() {
                             src={`${process.env.NEXT_PUBLIC_SITE_URL}/items/${item.slug}.jpg`}
                             width={96}
                             height={96}
-                            quality={80}
+                            quality={70}
                             sizes="(min-width: 1024px) 48px, 96px"
-                            className="aspect-square h-12 w-12 object-cover object-center lg:h-24 lg:w-24"
+                            className="aspect-square h-12 w-12 bg-stone-200/50 object-cover object-center lg:h-24 lg:w-24"
                             alt={`${item.name} image`}
                           />
                         </Link>

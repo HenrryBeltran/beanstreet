@@ -1,4 +1,5 @@
 import { getCartCount } from "@/lib/getCart";
+import useBlurDataURL from "@/utils/useBlurDataURL";
 import { Transition } from "@headlessui/react";
 import { useQuery } from "@tanstack/react-query";
 import { X } from "lucide-react";
@@ -58,8 +59,9 @@ export default function SuccessAddToCartModal({ item, isOpen, setIsOpen }: Props
                 src={`${process.env.NEXT_PUBLIC_SITE_URL}/items/${item.slug}.jpg`}
                 width={96}
                 height={96}
-                quality={75}
-                className="aspect-square h-24 w-24 object-cover object-center"
+                quality={70}
+                priority
+                className="aspect-square h-24 w-24 bg-stone-200/50 object-cover object-center"
                 alt={`${item.name} image`}
               />
               <div className="space-y-2">
