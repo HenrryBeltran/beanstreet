@@ -1,4 +1,5 @@
 import { Item } from "@/lib/getAllItems";
+import { getBase64 } from "@/utils/getBase64";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,7 +7,11 @@ type Props = {
   item: Item;
 };
 
-export default function ItemCard({ item }: Props) {
+export default async function ItemCard({ item }: Props) {
+  const blurDataURL = await getBase64(
+    `${process.env.SITE_URL}/items/${item.slug}-blur.jpg`,
+  );
+
   return (
     <li className="relative w-full">
       <Link
@@ -20,6 +25,8 @@ export default function ItemCard({ item }: Props) {
             quality={90}
             width={320}
             height={320}
+            placeholder="blur"
+            blurDataURL={blurDataURL}
             sizes="(min-width: 768px) 33vw, 50vw"
             loading="lazy"
             className="hover aspect-square w-full bg-stone-300 object-cover object-center transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-105"

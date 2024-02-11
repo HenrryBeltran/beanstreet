@@ -7,9 +7,10 @@ export default function AboutUsHeader() {
     <header className="grid grid-flow-row grid-cols-1 bg-orange-100 lg:grid-cols-2 lg:grid-rows-1 lg:py-0">
       <Image
         src={aboutUs}
+        priority
         placeholder="blur"
         alt="About us story"
-        quality={80}
+        quality={75}
         className="w-full object-cover object-center lg:h-full lg:object-left"
       />
       <div className="w-full bg-orange-100 p-6 lg:p-11">

@@ -22,6 +22,7 @@ export default function MapContainer() {
         <Image
           src={sanFrancisco}
           quality={80}
+          priority
           placeholder="blur"
           sizes="(min-width: 1024px) 50vw, 100vw"
           className="aspect-square justify-self-start object-cover"
