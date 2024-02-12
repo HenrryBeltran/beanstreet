@@ -1,6 +1,5 @@
 import { SelectCartItem } from "@/drizzle/schemas";
 import { CartItemToUpdate } from "@/lib/updateFromCart";
-import useBlurDataURL from "@/utils/useBlurDataURL";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

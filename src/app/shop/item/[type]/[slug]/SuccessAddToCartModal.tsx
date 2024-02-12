@@ -1,5 +1,4 @@
 import { getCartCount } from "@/lib/getCart";
-import useBlurDataURL from "@/utils/useBlurDataURL";
 import { Transition } from "@headlessui/react";
 import { useQuery } from "@tanstack/react-query";
 import { X } from "lucide-react";
