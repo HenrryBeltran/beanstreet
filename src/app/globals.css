@@ -43,4 +43,24 @@
       opacity: 1;
     }
   }
+
+  @keyframes appear-depth {
+    from {
+      opacity: 0;
+      scale: 0.7;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes grow-in-y {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(100%);
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import LinkButton from "@/components/LinkButton";
 import Image from "next/image";
 import AboutUsImage from "../../../public/about-us-overview.jpg";
+import ScrollAnimation from "@/components/client/ScrollAnimation";
 
 export default function AboutUsOverview() {
   return (
@@ -46,29 +47,65 @@ export default function AboutUsOverview() {
 
       <ul className="mx-auto flex max-w-screen-3xl flex-col items-center gap-8 px-6 py-32 lg:grid lg:w-[var(--global-viewport)] lg:grid-cols-3 lg:place-items-center lg:items-end lg:gap-8 lg:p-0 lg:pb-64 lg:pt-48">
         <li className="flex max-w-sm flex-col items-center gap-4 lg:gap-12">
-          <CoffeeSVG />
-          <p className="max-w-[300px] text-center text-xl text-stone-500 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[90%]">
-            We use the best <StrongCaption>coffee beans</StrongCaption> for a balance
-            flavor with <StrongCaption>rich</StrongCaption> and{" "}
-            <StrongCaption>strong</StrongCaption> aroma.
-          </p>
+          <ScrollAnimation
+            className="opacity-0"
+            keyframes={{ opacity: 1 }}
+            options={{ duration: 0.7, easing: [0.17, 0.55, 0.55, 1] }}
+          >
+            <CoffeeSVG />
+          </ScrollAnimation>
+          <ScrollAnimation
+            className="translate-y-8 opacity-0"
+            keyframes={{ opacity: 1, transform: "none" }}
+            options={{ delay: 0, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }}
+          >
+            <p className="max-w-[300px] text-center text-xl text-stone-500 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[90%]">
+              We use the best <StrongCaption>coffee beans</StrongCaption> for a balance
+              flavor with <StrongCaption>rich</StrongCaption> and{" "}
+              <StrongCaption>strong</StrongCaption> aroma.
+            </p>
+          </ScrollAnimation>
         </li>
         <li className="flex max-w-sm flex-col items-center gap-4 lg:gap-12">
-          <CoffeeMachineSVG />
-          <p className="max-w-[300px] text-center text-xl text-stone-500 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[90%]">
-            For everyone’s <StrongCaption>taste,</StrongCaption> customize your{" "}
-            <StrongCaption>coffee,</StrongCaption> with our best{" "}
-            <StrongCaption>quality products.</StrongCaption>
-          </p>
+          <ScrollAnimation
+            className="opacity-0"
+            keyframes={{ opacity: 1 }}
+            options={{ duration: 0.7, easing: [0.17, 0.55, 0.55, 1] }}
+          >
+            <CoffeeMachineSVG />
+          </ScrollAnimation>
+          <ScrollAnimation
+            className="translate-y-8 opacity-0"
+            keyframes={{ opacity: 1, transform: "none" }}
+            options={{ delay: 0.2, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }}
+          >
+            <p className="max-w-[300px] text-center text-xl text-stone-500 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[90%]">
+              For everyone’s <StrongCaption>taste,</StrongCaption> customize your{" "}
+              <StrongCaption>coffee,</StrongCaption> with our best{" "}
+              <StrongCaption>quality products.</StrongCaption>
+            </p>
+          </ScrollAnimation>
         </li>
         <li className="flex max-w-sm flex-col items-center gap-4 lg:gap-12">
-          <CheesecakeSVG />
-          <p className="max-w-[300px] text-center text-xl text-stone-500 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[80%]">
-            Our <StrongCaption>sandwiches</StrongCaption> and{" "}
-            <StrongCaption>pastries</StrongCaption> are the best way to{" "}
-            <StrongCaption>enjoy</StrongCaption> your{" "}
-            <StrongCaption>coffee.</StrongCaption>
-          </p>
+          <ScrollAnimation
+            className="opacity-0"
+            keyframes={{ opacity: 1 }}
+            options={{ duration: 0.7, easing: [0.17, 0.55, 0.55, 1] }}
+          >
+            <CheesecakeSVG />
+          </ScrollAnimation>
+          <ScrollAnimation
+            className="translate-y-8 opacity-0"
+            keyframes={{ opacity: 1, transform: "none" }}
+            options={{ delay: 0.4, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }}
+          >
+            <p className="max-w-[300px] text-center text-xl text-stone-500 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[80%]">
+              Our <StrongCaption>sandwiches</StrongCaption> and{" "}
+              <StrongCaption>pastries</StrongCaption> are the best way to{" "}
+              <StrongCaption>enjoy</StrongCaption> your{" "}
+              <StrongCaption>coffee.</StrongCaption>
+            </p>
+          </ScrollAnimation>
         </li>
       </ul>
     </section>

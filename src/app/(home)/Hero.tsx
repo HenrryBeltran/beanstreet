@@ -5,9 +5,11 @@ import { Facebook, Instagram, TikTok, Twitter, Youtube } from "@/components/Soci
 import Clipboard from "@/components/client/Clipboard";
 import { ChevronsDown } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { Suspense } from "react";
 import beanStreetHero from "../../../public/bean-street-hero.jpg";
+import SocialHeroLink from "./SocialHeroLink";
+import Appear from "./Appear";
+import ScrollDownMotionIcon from "./ScrollDownMotionIcon";
 
 export default function Hero() {
   return (
@@ -29,51 +31,57 @@ export default function Hero() {
         >
           info@beanstreet.project
         </Clipboard>
-        <span className="m-0 block h-80 w-[1.5px] rounded-full bg-stone-300"></span>
+        <span
+          style={{ animation: "grow-in-y 1.25s cubic-bezier(0.22,0.61,0.36,1)" }}
+          className="m-0 block h-80 w-[1.5px] origin-bottom rounded-full bg-stone-300"
+        ></span>
       </div>
-      <div className="absolute bottom-24 right-6 hidden flex-col items-center gap-8 text-stone-300 md:flex">
+      <div
+        style={{ animation: "grow-in-y 1.25s cubic-bezier(0.22,0.61,0.36,1)" }}
+        className="absolute bottom-24 right-6 hidden origin-top flex-col items-center gap-8 text-stone-300 md:flex"
+      >
         <span className="m-0 block h-72 w-[1.5px] rounded-full bg-stone-300"></span>
         <div className="flex flex-col items-center justify-center gap-6 text-stone-200">
-          <Link
-            className="transition-colors hover:text-stone-50"
+          <SocialHeroLink
+            id="instagram-link"
             href="https://instagram.com"
-            target="_blank"
-            aria-label="Instagram link"
+            ariaLabel="Instagram link"
+            delay={1.3}
           >
             <Instagram />
-          </Link>
-          <Link
-            className="transition-colors hover:text-stone-50"
+          </SocialHeroLink>
+          <SocialHeroLink
+            id="facebook-link"
             href="https://facebook.com"
-            target="_blank"
-            aria-label="Facebook link"
+            ariaLabel="Facebook link"
+            delay={1.4}
           >
             <Facebook />
-          </Link>
-          <Link
-            className="transition-colors hover:text-stone-50"
+          </SocialHeroLink>
+          <SocialHeroLink
+            id="twitter-link"
             href="https://twitter.com"
-            target="_blank"
-            aria-label="Twitter link"
+            ariaLabel="Twitter link"
+            delay={1.5}
           >
             <Twitter />
-          </Link>
-          <Link
-            className="transition-colors hover:text-stone-50"
+          </SocialHeroLink>
+          <SocialHeroLink
+            id="tiktok-link"
             href="https://tiktok.com"
-            target="_blank"
-            aria-label="Tiktok link"
+            ariaLabel="Tiktok link"
+            delay={1.6}
           >
             <TikTok />
-          </Link>
-          <Link
-            className="transition-colors hover:text-stone-50"
+          </SocialHeroLink>
+          <SocialHeroLink
+            id="youtube-link"
             href="https://youtube.com"
-            target="_blank"
-            aria-label="Youtube link"
+            ariaLabel="Youtube link"
+            delay={1.7}
           >
             <Youtube />
-          </Link>
+          </SocialHeroLink>
         </div>
       </div>
       <Navbar theme="dark" crystal={true} />
@@ -82,22 +90,24 @@ export default function Hero() {
       </Suspense>
       <div className="flex h-full grow items-center justify-center">
         <div className="mx-auto mt-12 flex max-w-3xl flex-col items-center text-center">
-          <h1 className="max-w-[80vw] font-serif text-[min(15vw,128px)] leading-[0.9] tracking-tighter text-white">
+          <h1
+            style={{ animation: "appear-depth 1.5s cubic-bezier(0.22,0.61,0.36,1)" }}
+            className="max-w-[80vw] font-serif text-[min(15vw,128px)] leading-[0.9] tracking-tighter text-white"
+          >
             Welcome to Bean Street
           </h1>
-          <p className="mb-12 mt-4 max-w-xs leading-relaxed text-stone-100 md:max-w-md md:text-xl md:leading-8">
-            Our cozy and modern coffee shop is the perfect place to relax and enjoy a cup
-            of coffee with friends or alone.
-          </p>
-          <LinkButton href="/shop" placeholder="Shop Now" size="lg" />
+          <Appear id="hero-p" duration={0.7} delay={0.5}>
+            <p className="mb-12 mt-4 max-w-xs leading-relaxed text-stone-100 md:max-w-md md:text-xl md:leading-8">
+              Our cozy and modern coffee shop is the perfect place to relax and enjoy a
+              cup of coffee with friends or alone.
+            </p>
+          </Appear>
+          <Appear id="shop-button" duration={0.7} delay={0.7}>
+            <LinkButton href="/shop" placeholder="Shop Now" size="lg" />
+          </Appear>
         </div>
       </div>
-      <ChevronsDown
-        size={64}
-        strokeWidth={2}
-        absoluteStrokeWidth={true}
-        className="mx-auto mb-8 mt-10 text-stone-200"
-      />
+      <ScrollDownMotionIcon />
     </section>
   );
 }

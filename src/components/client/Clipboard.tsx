@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { animate } from "motion";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
@@ -11,6 +12,14 @@ type Props = {
 
 export default function Clipboard({ children, className, value }: Props) {
   const [tooltip, setTooltip] = useState("Copy");
+
+  useEffect(() => {
+    animate(
+      "#clipboard",
+      { opacity: [0, 1] },
+      { duration: 0.5, delay: 1.3, easing: "ease-out" },
+    );
+  });
 
   async function checkClipboard() {
     const clip = await navigator.clipboard.readText();
@@ -24,7 +33,8 @@ export default function Clipboard({ children, className, value }: Props) {
 
   return (
     <span
-      className={twMerge("group relative cursor-pointer", className)}
+      id="clipboard"
+      className={twMerge("group relative cursor-pointer opacity-0", className)}
       onClick={async () => {
         await navigator.clipboard.writeText(value);
         checkClipboard();
