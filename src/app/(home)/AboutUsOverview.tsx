@@ -2,6 +2,7 @@ import LinkButton from "@/components/LinkButton";
 import Image from "next/image";
 import AboutUsImage from "../../../public/about-us-overview.jpg";
 import ScrollAnimation from "@/components/client/ScrollAnimation";
+import { twMerge } from "tailwind-merge";
 
 export default function AboutUsOverview() {
   return (
@@ -9,57 +10,75 @@ export default function AboutUsOverview() {
       <div className="mx-auto max-w-screen-3xl xl:w-[var(--global-viewport)] xl:pb-48 xl:pt-32">
         <div className="flex flex-col items-center xl:flex-row xl:justify-between">
           <figure className="z-10 px-6 py-12 xl:p-0">
-            <Image
-              src={AboutUsImage}
-              alt="About Us Overview Photo"
-              sizes="(min-width: 1280px) calc(50vw - (50vw - min(1680px, 82.2222vw) / 2)), calc(100vw - 48px)"
-              quality={80}
-              className="h-[27.875rem] w-full object-cover xl:w-[calc(50vw-var(--global-viewport-padding))] xl:translate-y-16"
-              placeholder="blur"
-              loading="lazy"
-            />
+            <ScrollAnimation
+              className="xl:translate-y-16"
+              keyframes={{ opacity: 1, transform: "none" }}
+              options={{ duration: 0.8, easing: [0.17, 0.55, 0.55, 1] }}
+              yViewPort={-100}
+            >
+              <Image
+                src={AboutUsImage}
+                alt="About Us Overview Photo"
+                sizes="(min-width: 1280px) calc(50vw - (50vw - min(1680px, 82.2222vw) / 2)), calc(100vw - 48px)"
+                quality={80}
+                className="h-[27.875rem] w-full -translate-x-8 object-cover opacity-0 xl:w-[calc(50vw-var(--global-viewport-padding))]"
+                placeholder="blur"
+                loading="lazy"
+              />
+            </ScrollAnimation>
           </figure>
-          <div className="w-full bg-orange-100 py-12 lg:py-16 xl:absolute xl:right-0 xl:top-32 xl:w-[calc(50%+128px)]">
-            <div className="flex justify-center px-6 xl:justify-start xl:px-0 xl:pl-[calc(128px+64px)] xl:pr-32">
-              <div className="md:max-w-[528px]">
-                <h2 className="mb-6 text-2xl uppercase leading-none text-orange-600">
-                  Overview
-                </h2>
-                <h3 className="mb-3 w-full font-serif text-4xl font-medium capitalize tracking-tight text-stone-800">
-                  We&apos;re committed to make the best coffee for you
-                </h3>
-                <p className="mb-11 w-full font-light leading-relaxed text-stone-700">
-                  We believe that coffee is not just a drink, but an experience.
-                  That&apos;s why we use only the best coffee beans and ingredients to
-                  create our unique coffee.
-                </p>
-                <LinkButton
-                  href="/about-us"
-                  placeholder="About Us"
-                  dark={true}
-                  ariaLabel="About us link"
-                />
+          <ScrollAnimation
+            className="w-full  xl:absolute xl:right-0 xl:top-32 xl:w-[calc(50%+128px)]"
+            keyframes={{ opacity: 1, transform: "none" }}
+            options={{ duration: 0.8, easing: [0.17, 0.55, 0.55, 1] }}
+            yViewPort={-380}
+          >
+            <div className="w-full translate-x-8 bg-orange-100 py-12 opacity-0 lg:py-16 ">
+              <div className="flex justify-center px-6 xl:justify-start xl:px-0 xl:pl-[calc(128px+64px)] xl:pr-32">
+                <ScrollAnimation
+                  keyframes={{ opacity: 1, transform: "none" }}
+                  options={{ duration: 0.6, delay: 0.6, easing: [0.17, 0.55, 0.55, 1] }}
+                  yViewPort={0}
+                >
+                  <div className="translate-y-4 opacity-0 md:max-w-[528px]">
+                    <h2 className="mb-6 text-2xl uppercase leading-none text-orange-600">
+                      Overview
+                    </h2>
+                    <h3 className="mb-3 w-full font-serif text-4xl font-medium capitalize tracking-tight text-stone-800">
+                      We&apos;re committed to make the best coffee for you
+                    </h3>
+                    <p className="mb-11 w-full font-light leading-relaxed text-stone-700">
+                      We believe that coffee is not just a drink, but an experience.
+                      That&apos;s why we use only the best coffee beans and ingredients to
+                      create our unique coffee.
+                    </p>
+                    <LinkButton
+                      href="/about-us"
+                      placeholder="About Us"
+                      dark={true}
+                      ariaLabel="About us link"
+                    />
+                  </div>
+                </ScrollAnimation>
               </div>
             </div>
-          </div>
+          </ScrollAnimation>
         </div>
       </div>
 
       <ul className="mx-auto flex max-w-screen-3xl flex-col items-center gap-8 px-6 py-32 lg:grid lg:w-[var(--global-viewport)] lg:grid-cols-3 lg:place-items-center lg:items-end lg:gap-8 lg:p-0 lg:pb-64 lg:pt-48">
         <li className="flex max-w-sm flex-col items-center gap-4 lg:gap-12">
           <ScrollAnimation
-            className="opacity-0"
             keyframes={{ opacity: 1 }}
             options={{ duration: 0.7, easing: [0.17, 0.55, 0.55, 1] }}
           >
-            <CoffeeSVG />
+            <CoffeeSVG className="opacity-0" />
           </ScrollAnimation>
           <ScrollAnimation
-            className="translate-y-8 opacity-0"
             keyframes={{ opacity: 1, transform: "none" }}
             options={{ delay: 0, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }}
           >
-            <p className="max-w-[300px] text-center text-xl text-stone-500 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[90%]">
+            <p className="max-w-[300px] translate-y-8 text-center text-xl text-stone-500 opacity-0 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[90%]">
               We use the best <StrongCaption>coffee beans</StrongCaption> for a balance
               flavor with <StrongCaption>rich</StrongCaption> and{" "}
               <StrongCaption>strong</StrongCaption> aroma.
@@ -68,18 +87,16 @@ export default function AboutUsOverview() {
         </li>
         <li className="flex max-w-sm flex-col items-center gap-4 lg:gap-12">
           <ScrollAnimation
-            className="opacity-0"
             keyframes={{ opacity: 1 }}
             options={{ duration: 0.7, easing: [0.17, 0.55, 0.55, 1] }}
           >
-            <CoffeeMachineSVG />
+            <CoffeeMachineSVG className="opacity-0" />
           </ScrollAnimation>
           <ScrollAnimation
-            className="translate-y-8 opacity-0"
             keyframes={{ opacity: 1, transform: "none" }}
             options={{ delay: 0.2, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }}
           >
-            <p className="max-w-[300px] text-center text-xl text-stone-500 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[90%]">
+            <p className="max-w-[300px] translate-y-8 text-center text-xl text-stone-500 opacity-0 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[90%]">
               For everyone’s <StrongCaption>taste,</StrongCaption> customize your{" "}
               <StrongCaption>coffee,</StrongCaption> with our best{" "}
               <StrongCaption>quality products.</StrongCaption>
@@ -88,18 +105,16 @@ export default function AboutUsOverview() {
         </li>
         <li className="flex max-w-sm flex-col items-center gap-4 lg:gap-12">
           <ScrollAnimation
-            className="opacity-0"
             keyframes={{ opacity: 1 }}
             options={{ duration: 0.7, easing: [0.17, 0.55, 0.55, 1] }}
           >
-            <CheesecakeSVG />
+            <CheesecakeSVG className="opacity-0" />
           </ScrollAnimation>
           <ScrollAnimation
-            className="translate-y-8 opacity-0"
             keyframes={{ opacity: 1, transform: "none" }}
             options={{ delay: 0.4, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }}
           >
-            <p className="max-w-[300px] text-center text-xl text-stone-500 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[80%]">
+            <p className="max-w-[300px] translate-y-8 text-center text-xl text-stone-500 opacity-0 [text-wrap:pretty] md:text-2xl md:leading-normal lg:min-w-[210px] lg:max-w-max 3xl:max-w-[80%]">
               Our <StrongCaption>sandwiches</StrongCaption> and{" "}
               <StrongCaption>pastries</StrongCaption> are the best way to{" "}
               <StrongCaption>enjoy</StrongCaption> your{" "}
@@ -116,7 +131,7 @@ function StrongCaption({ children }: { children: React.ReactNode }) {
   return <strong className="font-bold text-stone-700">{children}</strong>;
 }
 
-function CoffeeSVG() {
+function CoffeeSVG({ className }: { className?: string }) {
   return (
     <>
       <svg
@@ -125,7 +140,7 @@ function CoffeeSVG() {
         viewBox="0 0 151 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-32 lg:w-fit [&>path]:fill-stone-700"
+        className={twMerge(className, "w-32 lg:w-fit [&>path]:fill-stone-700")}
       >
         <path d="M84.0996 122.914C81.914 122.904 79.9766 123.928 78.0344 124.807C76.1101 125.677 74.4352 127.033 72.9694 128.535C72.0987 129.427 71.4193 130.366 70.88 131.494C70.3086 132.691 69.6933 133.665 68.572 134.415C67.5255 135.116 66.5894 135.623 65.3695 135.932C64.5701 136.135 63.8396 136.327 63.0081 136.166C62.3393 136.036 61.3949 135.668 61.37 134.884C61.3629 134.669 61.2156 134.558 61.0516 134.535C61.0279 133.785 61.054 133.036 61.2298 132.299C61.5268 131.057 62.0578 129.838 62.6862 128.728C63.8372 126.697 65.3921 124.639 67.1049 123.046C67.8402 122.361 68.6777 121.798 69.4058 121.118C70.2896 120.292 71.323 119.576 72.499 119.221C74.7227 118.552 77.1519 118.093 79.4741 118.091C80.0645 118.09 80.6762 118.108 81.2428 118.293C81.7714 118.464 82.1776 118.839 82.6861 119.05C83.1149 119.227 83.5782 119.286 84.0165 119.432C84.7518 119.678 85.0689 120.143 85.569 120.687C85.9586 121.108 86.2283 121.48 86.4385 122.019C86.492 122.158 86.7462 122.654 86.701 122.795L86.6927 122.873L86.4955 122.965C86.0382 123.213 84.5819 122.916 84.0996 122.914ZM87.3579 122.293C87.0241 121.201 86.4706 120.475 85.7222 119.634C84.8468 118.649 83.6103 118.708 82.5281 118.099C80.4197 116.915 77.8741 117.255 75.5768 117.732C74.3224 117.993 72.8589 118.17 71.6829 118.689C71.184 118.91 70.6745 119.197 70.1981 119.465C69.5543 119.828 69.1338 120.379 68.5637 120.833C66.2236 122.694 64.285 124.843 62.6457 127.36C61.8154 128.635 61.1681 130.008 60.7286 131.465C60.2617 133.015 60.3971 134.495 60.5634 136.082C60.5979 136.409 61.0469 136.429 61.1253 136.164C62.0922 137.102 64.14 137.064 65.2887 136.764C67.5017 136.186 69.6553 135.076 70.9477 133.104C71.7257 131.918 72.0999 130.628 73.0799 129.546C74.1323 128.382 75.3 127.372 76.6054 126.501C77.6389 125.812 78.7519 125.362 79.872 124.839C81.3782 124.139 82.7966 123.665 84.4762 123.697C85.6831 123.72 87.9376 124.193 87.3579 122.293Z" />
         <path d="M88.8666 132.584C87.4697 134.753 85.9789 136.576 83.7149 137.877C81.4449 139.18 78.9361 140.381 76.3799 140.977C73.3271 141.69 70.1947 141.672 67.0873 141.439C65.4884 141.319 64.0808 140.671 62.6922 139.898C61.6077 139.293 60.3616 137.996 60.4175 136.657C60.8926 136.131 62.9915 137.133 63.5439 137.307C64.5761 137.632 65.7485 137.849 66.8307 137.704C69.1244 137.398 70.5404 135.694 72.1796 134.278C72.9755 133.589 73.3401 132.681 73.8806 131.79C74.5791 130.638 75.5543 129.639 76.526 128.719C77.4252 127.865 78.5097 127.262 79.5242 126.565C80.5576 125.855 81.6801 125.231 82.8276 124.743C83.9584 124.263 84.8624 123.7 86.1547 123.763C87.5742 123.831 88.7063 124.161 89.4736 125.419C90.058 126.374 90.4583 127.597 90.3966 128.722C90.3194 130.132 89.615 131.422 88.8666 132.584ZM91.1331 127.797C90.8801 125.808 89.6756 123.499 87.5374 123.12C86.1678 122.878 84.9229 122.974 83.6282 123.461C83.1138 123.654 82.6411 123.945 82.1386 124.167C81.4508 124.47 80.7797 124.882 80.1311 125.261C77.778 126.639 75.508 128.272 73.8569 130.472C73.377 131.111 73.0111 131.793 72.6025 132.476C72.1535 133.225 71.6237 133.731 70.9989 134.336C69.8764 135.422 68.5472 136.617 66.9531 136.909C65.2425 137.223 63.399 136.493 61.7811 136.007C61.3487 135.877 60.7619 135.644 60.3165 135.859C60.244 135.893 60.1217 136.081 60.0362 136.253C59.8461 136.257 59.6537 136.378 59.6406 136.621C59.504 139.103 62.1374 140.516 64.0048 141.407C65.3352 142.043 66.6323 142.206 68.091 142.264C69.6733 142.327 71.2186 142.503 72.7973 142.296C74.3177 142.097 75.8929 141.938 77.3694 141.52C78.8221 141.109 80.1739 140.497 81.534 139.852C84.0463 138.662 86.4422 137.36 88.1004 135.057C89.6066 132.964 91.4835 130.54 91.1331 127.797Z" />
@@ -151,7 +166,7 @@ function CoffeeSVG() {
   );
 }
 
-function CoffeeMachineSVG() {
+function CoffeeMachineSVG({ className }: { className?: string }) {
   return (
     <>
       <svg
@@ -160,7 +175,7 @@ function CoffeeMachineSVG() {
         viewBox="0 0 200 308"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-44 xl:w-fit"
+        className={twMerge(className, "w-44 xl:w-fit")}
       >
         <path
           d="M118.222 94.6682C107.594 80.9582 89.9038 76.8259 72.3884 76.4546C69.9328 76.4037 67.8885 76.9405 66.2391 77.8624C61.6775 77.3999 57.0788 77.7277 52.8623 79.2872C48.3717 80.9486 45.1007 84.0475 43.4919 87.6418C39.1081 94.9175 43.8182 103.602 50.5949 109.261C50.9817 112.829 53.3107 116.095 58.0883 117.395C58.6865 118.015 59.2951 118.627 59.9107 119.23C63.2735 124.351 67.5969 128.764 73.176 132.347C72.5046 136.825 74.0565 141.695 77.3623 145.266C87.3995 156.108 116.073 160.025 120.336 142.351C122.299 134.261 123.368 125.45 124.216 117.201C125.04 109.213 123.345 101.285 118.222 94.6682Z"
@@ -231,7 +246,6 @@ function CoffeeMachineSVG() {
         <path
           d="M30.6985 212.135C31.1399 212.954 32.4909 212.196 32.0239 211.379C30.0446 207.916 28.9539 203.953 27.4531 200.3C27.1523 199.568 25.8815 199.918 26.173 200.664C27.6633 204.468 28.7436 208.506 30.6985 212.135Z"
           className="fill-stone-700"
-          fill="#44403C"
         />
         <path
           d="M30.6985 212.135C31.1399 212.954 32.4909 212.196 32.0239 211.379C30.0446 207.916 28.9539 203.953 27.4531 200.3C27.1523 199.568 25.8815 199.918 26.173 200.664C27.6633 204.468 28.7436 208.506 30.6985 212.135Z"
@@ -261,7 +275,7 @@ function CoffeeMachineSVG() {
   );
 }
 
-function CheesecakeSVG() {
+function CheesecakeSVG({ className }: { className?: string }) {
   return (
     <>
       <svg
@@ -270,7 +284,7 @@ function CheesecakeSVG() {
         viewBox="0 0 181 175"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-40 xl:w-fit"
+        className={twMerge(className, "w-40 xl:w-fit")}
       >
         <path
           fillRule="evenodd"

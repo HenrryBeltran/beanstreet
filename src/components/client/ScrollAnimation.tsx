@@ -7,6 +7,7 @@ import {
   inView,
 } from "motion";
 import { useEffect, useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
   children: React.ReactNode;
@@ -32,17 +33,17 @@ export default function ScrollAnimation({
     inView(
       viewRef.current!,
       () => {
-        animate(ref.current!, keyframes, options);
+        if (ref.current) {
+          animate(ref.current.firstElementChild!, keyframes, options);
+        }
       },
       { amount: "all" },
     );
   });
 
   return (
-    <div className="relative">
-      <div ref={ref} className={className}>
-        {children}
-      </div>
+    <div ref={ref} className={twMerge("relative", className)}>
+      {children}
       <div
         ref={viewRef}
         style={{
