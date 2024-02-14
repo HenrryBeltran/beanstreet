@@ -1,4 +1,5 @@
 import { Item } from "@/lib/getAllItems";
+import { Try } from "@/utils/safeTry";
 import Image from "next/image";
 import Link from "next/link";
 import fs from "node:fs/promises";
@@ -9,11 +10,18 @@ type Props = {
 };
 
 export default async function ItemCard({ item }: Props) {
-  const buffer = await fs.readFile(
-    process.env.NODE_ENV === "development"
-      ? `./public/items/${item.slug}.jpg`
-      : `./items/${item.slug}.jpg`,
+  const { error, result: buffer } = await Try(
+    fs.readFile(
+      process.env.NODE_ENVIRONMENT === "development"
+        ? `./public/items/${item.slug}.jpg`
+        : `./items/${item.slug}.jpg`,
+    ),
   );
+
+  if (error) {
+    throw new Error(JSON.stringify(error));
+  }
+
   const { base64 } = await getPlaiceholder(buffer, { size: 4 });
 
   return (
