@@ -9,7 +9,11 @@ type Props = {
 };
 
 export default async function ItemCard({ item }: Props) {
-  const buffer = await fs.readFile(`./public/items/${item.slug}.jpg`);
+  const buffer = await fs.readFile(
+    process.env.NODE_ENV === "development"
+      ? `./public/items/${item.slug}.jpg`
+      : `./items/${item.slug}.jpg`,
+  );
   const { base64 } = await getPlaiceholder(buffer, { size: 4 });
 
   return (

@@ -8,7 +8,11 @@ type Props = {
   description: string;
 };
 export default async function ItemInfo({ title, slug, description }: Props) {
-  const buffer = await fs.readFile(`./public/items/${slug}.jpg`);
+  const buffer = await fs.readFile(
+    process.env.NODE_ENV === "development"
+      ? `./public/items/${slug}.jpg`
+      : `./items/${slug}.jpg`,
+  );
   const { base64 } = await getPlaiceholder(buffer, { size: 4 });
 
   return (
