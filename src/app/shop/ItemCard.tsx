@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import fs from "node:fs/promises";
 import { getPlaiceholder } from "plaiceholder";
-import { dirname } from "node:path";
+import path, { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 type Props = {
@@ -15,12 +15,11 @@ export default async function ItemCard({ item }: Props) {
   const __dirname = dirname(fileURLToPath(import.meta.url));
   console.log(__dirname);
 
+  const devPath = path.join(__dirname, "../../../", `public/items/${item.slug}.jpg`);
+  const prodPath = path.join(__dirname, "../../../", `items/${item.slug}.jpg`);
+
   const { error, result: buffer } = await Try(
-    fs.readFile(
-      process.env.NODE_ENVIRONMENT === "development"
-        ? `public/items/${item.slug}.jpg`
-        : `items/${item.slug}.jpg`,
-    ),
+    fs.readFile(process.env.NODE_ENVIRONMENT === "development" ? devPath : prodPath),
   );
 
   if (error) {
