@@ -1,5 +1,5 @@
+import { Try } from "@/utils/safeTry";
 import Image from "next/image";
-import fs from "node:fs/promises";
 import { getPlaiceholder } from "plaiceholder";
 
 type Props = {
@@ -8,11 +8,16 @@ type Props = {
   description: string;
 };
 export default async function ItemInfo({ title, slug, description }: Props) {
-  const buffer = await fs.readFile(
-    process.env.NODE_ENV === "development"
-      ? `./public/items/${slug}.jpg`
-      : `./items/${slug}.jpg`,
+  const { error, result: buffer } = await Try(
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/items/${slug}.jpg`).then(async (res) => {
+      return Buffer.from(await res.arrayBuffer());
+    }),
   );
+
+  if (error) {
+    throw new Error(JSON.stringify(error, null, 2));
+  }
+
   const { base64 } = await getPlaiceholder(buffer, { size: 4 });
 
   return (

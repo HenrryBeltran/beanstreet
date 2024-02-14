@@ -2,24 +2,19 @@ import { Item } from "@/lib/getAllItems";
 import { Try } from "@/utils/safeTry";
 import Image from "next/image";
 import Link from "next/link";
-import fs from "node:fs/promises";
 import { getPlaiceholder } from "plaiceholder";
-import path, { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 
 type Props = {
   item: Item;
 };
 
 export default async function ItemCard({ item }: Props) {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  console.log(__dirname);
-
-  const devPath = path.join(__dirname, "../../../", `public/items/${item.slug}.jpg`);
-  const prodPath = path.join(__dirname, "../../../", `items/${item.slug}.jpg`);
-
   const { error, result: buffer } = await Try(
-    fs.readFile(process.env.NODE_ENVIRONMENT === "development" ? devPath : prodPath),
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/items/${item.slug}.jpg`).then(
+      async (res) => {
+        return Buffer.from(await res.arrayBuffer());
+      },
+    ),
   );
 
   if (error) {
