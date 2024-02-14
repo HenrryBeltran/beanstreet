@@ -4,22 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 import fs from "node:fs/promises";
 import { getPlaiceholder } from "plaiceholder";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 type Props = {
   item: Item;
 };
 
 export default async function ItemCard({ item }: Props) {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  console.log(__dirname);
+
   const { error, result: buffer } = await Try(
     fs.readFile(
       process.env.NODE_ENVIRONMENT === "development"
-        ? `./public/items/${item.slug}.jpg`
-        : `./items/${item.slug}.jpg`,
+        ? `public/items/${item.slug}.jpg`
+        : `items/${item.slug}.jpg`,
     ),
   );
 
   if (error) {
-    throw new Error(JSON.stringify(error));
+    throw new Error(JSON.stringify(error, null, 2));
   }
 
   const { base64 } = await getPlaiceholder(buffer, { size: 4 });
