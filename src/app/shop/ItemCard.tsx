@@ -1,28 +1,12 @@
 import { Item } from "@/lib/getAllItems";
-import { Try } from "@/utils/safeTry";
 import Image from "next/image";
 import Link from "next/link";
-import { getPlaiceholder } from "plaiceholder";
 
 type Props = {
   item: Item;
 };
 
 export default async function ItemCard({ item }: Props) {
-  const { error, result: buffer } = await Try(
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/items/${item.slug}.jpg`).then(
-      async (res) => {
-        return Buffer.from(await res.arrayBuffer());
-      },
-    ),
-  );
-
-  if (error) {
-    throw new Error(JSON.stringify(error, null, 2));
-  }
-
-  const { base64 } = await getPlaiceholder(buffer, { size: 4 });
-
   return (
     <li className="relative w-full">
       <Link
@@ -36,8 +20,6 @@ export default async function ItemCard({ item }: Props) {
             quality={90}
             width={320}
             height={320}
-            placeholder="blur"
-            blurDataURL={base64}
             loading="lazy"
             sizes="(min-width: 768px) 33vw, 50vw"
             className="hover aspect-square w-full bg-stone-300 object-cover object-center transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-105"

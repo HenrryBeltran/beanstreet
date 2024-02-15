@@ -14,9 +14,6 @@ dependencies:
   '@hookform/resolvers':
     specifier: ^3.3.4
     version: 3.3.4(react-hook-form@7.50.1)
-  '@plaiceholder/next':
-    specifier: ^3.0.0
-    version: 3.0.0(next@14.1.0)(plaiceholder@3.0.0)(sharp@0.32.6)
   '@tanstack/react-query':
     specifier: ^5.17.19
     version: 5.20.2(react@18.2.0)
@@ -62,9 +59,6 @@ dependencies:
   pg:
     specifier: ^8.11.3
     version: 8.11.3
-  plaiceholder:
-    specifier: ^3.0.0
-    version: 3.0.0(sharp@0.32.6)
   postgres:
     specifier: ^3.4.3
     version: 3.4.3
@@ -902,18 +896,6 @@ packages:
     engines: {node: '>=14'}
     requiresBuild: true
     optional: true
-
-  /@plaiceholder/next@3.0.0(next@14.1.0)(plaiceholder@3.0.0)(sharp@0.32.6):
-    resolution: {integrity: sha512-7UK/H1X64hwo2VaxOPKMXE+OY9IgmKLPsq/xKHZ+gU07oqQSfIWWIgpVVucMB3ZgVYah+68agR15BRuSxAuMHw==}
-    peerDependencies:
-      next: '>= 10.0.0'
-      plaiceholder: '>=3.0.0'
-      sharp: '>= 0.30.6'
-    dependencies:
-      next: 14.1.0(react-dom@18.2.0)(react@18.2.0)
-      plaiceholder: 3.0.0(sharp@0.32.6)
-      sharp: 0.32.6
-    dev: false
 
   /@react-leaflet/core@2.1.0(leaflet@1.9.4)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Qk7Pfu8BSarKGqILj4x7bCSZ1pjuAPZ+qmRwH5S7mDS91VSbVVsJSrW4qA+GPrro8t69gFYVMWb1Zc4yFmPiVg==}
@@ -3891,14 +3873,6 @@ packages:
   /pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
-
-  /plaiceholder@3.0.0(sharp@0.32.6):
-    resolution: {integrity: sha512-jwHxxHPnr1BwRzPCeZgEK2BMsEy2327sWynw3qb6XC/oGgGDUTPtR8pFxFQmNArhMBwhkUbUr5OPhhIJpCa8eQ==}
-    peerDependencies:
-      sharp: '>= 0.30.6'
-    dependencies:
-      sharp: 0.32.6
-    dev: false
 
   /postcss-import@15.1.0(postcss@8.4.35):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
