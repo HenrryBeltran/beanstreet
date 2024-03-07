@@ -191,7 +191,7 @@ export default function Footer() {
         <div className="pb-[420px] md:col-span-2 md:col-start-5 md:mb-16 md:place-self-end md:justify-self-start md:p-0 xl:col-start-6 xl:mb-24 xl:h-min">
           <div>
             <span className="block px-6 text-center text-sm md:p-0 md:text-start">
-              &copy;2023 Bean Street, Design and Code{" "}
+              &copy;2024 Bean Street, Design and Code{" "}
               <Link
                 className="transition-all hover:font-semibold hover:text-stone-900"
                 href="https://henrryb.site/"
