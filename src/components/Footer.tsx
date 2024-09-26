@@ -194,7 +194,7 @@ export default function Footer() {
               &copy;2024 Bean Street, Design and Code{" "}
               <Link
                 className="transition-all hover:font-semibold hover:text-stone-900"
-                href="https://henrryb.site/"
+                href="https://portfolio.henrry.site/"
                 target="_blank"
                 aria-label="Developer & Designer - Henrry Beltrán"
               >
