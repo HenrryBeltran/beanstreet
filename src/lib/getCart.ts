@@ -54,7 +54,7 @@ export async function getCartCount() {
   }
 
   if (!response.ok) {
-    console.log("~ Server Error: Bad respone.", response.status);
+    console.error("~ Server Error: Bad respone.", response.status);
     return null;
   }
 

@@ -80,10 +80,10 @@ export default function SignUpForm() {
       className="flex w-full max-w-md flex-col items-start"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <label htmlFor="name" className="mb-2 text-sm leading-none text-stone-600">
+      <label htmlFor="name" className="mb-1 text-sm leading-none text-stone-600">
         Name
       </label>
-      <div className="mb-6 w-full">
+      <div className="mb-2 w-full">
         <input
           className="w-full rounded-md border border-none border-stone-300 bg-stone-200/50 px-5 py-3 leading-none text-stone-800 outline-none"
           id="name"
@@ -94,10 +94,10 @@ export default function SignUpForm() {
           {errors.name?.message}
         </p>
       </div>
-      <label htmlFor="email" className="mb-2 text-sm leading-none text-stone-600">
+      <label htmlFor="email" className="mb-1 text-sm leading-none text-stone-600">
         Email
       </label>
-      <div className="mb-6 w-full">
+      <div className="mb-2 w-full">
         <input
           className="w-full rounded-md bg-stone-200/50 px-5 py-3 leading-none text-stone-800 outline-none aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500"
           id="email"
@@ -109,10 +109,10 @@ export default function SignUpForm() {
           {errors.email?.message}
         </p>
       </div>
-      <label htmlFor="password" className="mb-2 text-sm leading-none text-stone-600">
+      <label htmlFor="password" className="mb-1 text-sm leading-none text-stone-600">
         Password
       </label>
-      <div className="mb-6 w-full">
+      <div className="mb-2 w-full">
         <div
           className="flex w-full rounded-md aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500"
           aria-invalid={errors.password ? "true" : "false"}
@@ -144,11 +144,11 @@ export default function SignUpForm() {
       </div>
       <label
         htmlFor="confirm-password"
-        className="mb-2 text-sm leading-none text-stone-600"
+        className="mb-1 text-sm leading-none text-stone-600"
       >
         Confirm Password
       </label>
-      <div className="mb-12 w-full">
+      <div className="mb-8 w-full">
         <div
           className="flex w-full rounded-md aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-500"
           aria-invalid={errors.confirmPassword ? "true" : "false"}

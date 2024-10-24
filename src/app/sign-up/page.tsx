@@ -20,7 +20,7 @@ export default async function SignInPage() {
         <p className="text-sm leading-none text-stone-500">
           Already have an account?{" "}
           <a className="whitespace-nowrap text-stone-700 hover:underline" href="/sign-in">
-            Login here.
+            Log in here.
           </a>
         </p>
         <div className="mt-6 flex w-full flex-col items-center justify-center">
