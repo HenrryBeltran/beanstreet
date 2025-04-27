@@ -88,7 +88,7 @@ export default function LicensesPage() {
         <p className="leading-relaxed text-stone-600">
           Website design and code by Henrry Beltrán, for contact check my portfolio{" "}
           <a
-            href="https://portfolio.henrry.site/"
+            href="https://henrry.site/"
             target="_blank"
             className="font-semibold hover:underline"
           >
